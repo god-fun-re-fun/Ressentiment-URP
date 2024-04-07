@@ -89,9 +89,10 @@ public class ReReManager : MonoBehaviour
         }
 
         Transform waterTransform = nextReRe.transform.Find("Sphere");
+        Transform lightTransform = nextReRe.transform.Find("Point Light");
 
         Renderer waterRenderer = waterTransform.GetComponent<SkinnedMeshRenderer>();
-        
+        Light light = lightTransform.GetComponent<Light>();
 
         // 1. RGB에서 HSL로 변환
         float h, s, l;
@@ -115,6 +116,7 @@ public class ReReManager : MonoBehaviour
         // 유사 색상 2 적용을 원한다면 다른 머티리얼 혹은 프로퍼티 사용
         waterRenderer.material.SetColor("_Rim_Color", similarColor2);
         WorldColorManager.Instance.UpdateWorld_Rim_Color(similarColor2);
+        light.color = similarColor2;
     }
 
 

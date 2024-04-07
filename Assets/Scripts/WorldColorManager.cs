@@ -14,6 +14,8 @@ public class WorldColorManager : MonoBehaviour
 
     public float velocity;
 
+    public Light worldLight;
+
     void Awake()
     {
         // 싱글톤 인스턴스를 초기화합니다.
@@ -66,5 +68,6 @@ public class WorldColorManager : MonoBehaviour
 
         _Rim_Color = new Color(new_r, new_g, new_b);
         sphere.material.SetColor("_Rim_Color", _Rim_Color);
+        worldLight.color = _Rim_Color;
     }
 }
