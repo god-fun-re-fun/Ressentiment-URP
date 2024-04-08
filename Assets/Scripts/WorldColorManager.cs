@@ -16,6 +16,9 @@ public class WorldColorManager : MonoBehaviour
 
     public Light worldLight;
 
+    public GameObject grayCity;
+    public GameObject greenCity;
+
     void Awake()
     {
         // 싱글톤 인스턴스를 초기화합니다.
@@ -48,6 +51,11 @@ public class WorldColorManager : MonoBehaviour
 
         _TopColor = new Color(new_r, new_g, new_b);
         sphere.material.SetColor("_TopColor", _TopColor);
+        if(new_g > 0.8)
+        {
+            grayCity.SetActive(false);
+            greenCity.SetActive(true);
+        }
     }
 
     public void UpdateWorld_BottomColor(Color rere)

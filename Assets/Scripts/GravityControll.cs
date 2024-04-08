@@ -8,7 +8,7 @@ public class GravityControll : MonoBehaviour
     private Rigidbody rb;
     // 원하는 방향의 중력을 설정할 수 있습니다.
     // 예를 들어, 아래쪽으로의 중력을 설정하려면 (0, -1, 0)으로 설정합니다.
-    private Vector3 gravityDirection;
+    private Vector3 gravityDirection = new Vector3(0,-1,0);
 
     public void setGravityDirection(Vector3 v)
     {
