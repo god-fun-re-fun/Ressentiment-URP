@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class ReReManager : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class ReReManager : MonoBehaviour
     public GameObject prefabPeople;
 
     public Camera mainCamera;
+    public List<Transform> targets; // 카메라가 이동할 타겟 Transform 리스트
+    public float cameraSpeed = 0.1f;      // 카메라 이동 속도
+    private int currentIndex = 0;   // 현재 타겟 인덱스
     public Transform createCam;
     public Transform originCam;
     public float smoothSpeed = 0.1f;
@@ -17,6 +21,9 @@ public class ReReManager : MonoBehaviour
     public Animator worldSymbol;
     public Animator headUpReRe01;
     public Animator headUpReRe02;
+
+
+    private bool isCoroutineRunning = false; // 코루틴 실행 상태를 추적하는 변수
 
     void Awake()
     {
@@ -132,6 +139,8 @@ public class ReReManager : MonoBehaviour
 
     IEnumerator MoveCameraToTargetAndBack()
     {
+        isCoroutineRunning = true;
+
         // 목표 위치로 이동
         while (Vector3.Distance(mainCamera.transform.position, createCam.position) > 0.01f)
         {
@@ -157,6 +166,8 @@ public class ReReManager : MonoBehaviour
 
             yield return null;
         }
+
+        isCoroutineRunning = false;
     }
 
     void GetPeople()
@@ -185,9 +196,35 @@ public class ReReManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !isCoroutineRunning)
         {
             GetPeople();
+        }
+
+        // 코루틴이 실행 중이 아닐 때만 MoveToNextTargetSmoothly() 호출
+        if (!isCoroutineRunning)
+        {
+            MoveToNextTargetSmoothly();
+        }
+    }
+
+    void MoveToNextTargetSmoothly()
+    {
+        if (targets.Count == 0) return; // 타겟이 없으면 함수 종료
+
+        // 현재 타겟으로 카메라를 부드럽게 이동
+        Transform targetTransform = targets[currentIndex];
+
+        // Lerp 함수를 사용하여 현재 위치와 목표 위치 사이를 부드럽게 이동
+        mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position, targetTransform.position, cameraSpeed * Time.deltaTime);
+
+        mainCamera.transform.rotation = Quaternion.Lerp(mainCamera.transform.rotation, targetTransform.rotation, cameraSpeed * Time.deltaTime);
+
+        // 카메라가 현재 타겟에 거의 도달했는지 체크 (거리가 매우 가까워졌는지)
+        if (Vector3.Distance(mainCamera.transform.position, targetTransform.position) < 0.03f)
+        {
+            // 다음 타겟으로 인덱스 업데이트 (순환)
+            currentIndex = (currentIndex + 1) % targets.Count;
         }
     }
 }
