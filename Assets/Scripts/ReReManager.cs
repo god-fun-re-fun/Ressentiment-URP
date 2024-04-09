@@ -13,6 +13,8 @@ public class ReReManager : MonoBehaviour
     public Transform originCam;
     public float smoothSpeed = 0.1f;
 
+    public Animator worldSymbol;
+
     void Awake()
     {
         instance = this;
@@ -160,6 +162,7 @@ public class ReReManager : MonoBehaviour
         APIManager.Instance.onCompletedRequest = ApplyColorFromAPI;
         APIManager.Instance.GetAPI();
         StartCoroutine(MoveCameraToTargetAndBack());
+        worldSymbol.SetTrigger("Create");
     }
 
     void ApplyColorFromAPI()
