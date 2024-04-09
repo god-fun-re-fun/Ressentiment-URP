@@ -5,11 +5,12 @@ using UnityEngine;
 public class Fall : MonoBehaviour
 {
     public Vector3 gravity;
+    public float standingTime;
 
     IEnumerator WaitOneSecondCoroutine(Collider player)
     {
         // 1초 동안 실행을 일시 중지합니다.
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(standingTime);
 
         // 대기가 완료된 후 setGravityDirection 호출
         GravityControll gravityControll = player.GetComponent<GravityControll>();

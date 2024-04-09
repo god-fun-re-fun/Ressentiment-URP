@@ -6,6 +6,7 @@ public class RotateTrigger : MonoBehaviour
 {
     public Vector3 targetDirection; // 벽을 타고 올라가는 방향
     public Vector3 upDirection; // 캐릭터의 '위' 방향이 될 벡터, 벽의 '옆면' 방향
+    public float rotateSpeed = 1f; // 회전 속도
 
     private void OnTriggerStay(Collider other)
     {
@@ -18,7 +19,7 @@ public class RotateTrigger : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(targetDirection.normalized, upDirection.normalized);
 
             // 부드러운 회전 처리
-            other.transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, 1f * Time.deltaTime);
+            other.transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotateSpeed * Time.deltaTime);
         }
     }
 

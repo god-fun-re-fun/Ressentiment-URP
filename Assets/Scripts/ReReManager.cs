@@ -12,8 +12,11 @@ public class ReReManager : MonoBehaviour
     public Transform createCam;
     public Transform originCam;
     public float smoothSpeed = 0.1f;
+    public float waitingTime = 10.0f;
 
     public Animator worldSymbol;
+    public Animator headUpReRe01;
+    public Animator headUpReRe02;
 
     void Awake()
     {
@@ -141,7 +144,7 @@ public class ReReManager : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSeconds(4); // 목표 위치에서 잠시 대기
+        yield return new WaitForSeconds(waitingTime); // 목표 위치에서 잠시 대기
 
         // 원래 위치로 돌아오기
         while (Vector3.Distance(mainCamera.transform.position, originCam.position) > 0.01f)
@@ -163,6 +166,8 @@ public class ReReManager : MonoBehaviour
         APIManager.Instance.GetAPI();
         StartCoroutine(MoveCameraToTargetAndBack());
         worldSymbol.SetTrigger("Create");
+        headUpReRe01.SetTrigger("Create");
+        headUpReRe02.SetTrigger("Create");
     }
 
     void ApplyColorFromAPI()

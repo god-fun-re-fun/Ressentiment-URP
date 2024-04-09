@@ -15,6 +15,7 @@ public class WorldColorManager : MonoBehaviour
     public float velocity;
 
     public Light worldLight;
+    public Light billboardLight;
 
     public GameObject grayCity;
     public GameObject greenCity;
@@ -56,6 +57,21 @@ public class WorldColorManager : MonoBehaviour
             grayCity.SetActive(false);
             greenCity.SetActive(true);
         }
+
+        if(new_r + 0.2 > 1.0f)
+        {
+            new_r = 0.8f;
+        }
+        if(new_g + 0.2 > 1.0f)
+        {
+            new_g = 0.8f;
+        }
+        if(new_b + 0.2 > 1.0f)
+        {
+            new_b = 0.8f;
+        }
+        worldLight.color = new Color(new_r + 0.2f, new_g + 0.2f, new_b + 0.2f);
+        billboardLight.color = new Color(new_r + 0.2f, new_g + 0.2f, new_b + 0.2f);
     }
 
     public void UpdateWorld_BottomColor(Color rere)
@@ -76,6 +92,5 @@ public class WorldColorManager : MonoBehaviour
 
         _Rim_Color = new Color(new_r, new_g, new_b);
         sphere.material.SetColor("_Rim_Color", _Rim_Color);
-        worldLight.color = _Rim_Color;
     }
 }
