@@ -8,6 +8,11 @@ public class ReReManager : MonoBehaviour
     public Transform createPos;
     public GameObject prefabPeople;
 
+    public Camera mainCamera;
+    public Transform createCam;
+    public Transform originCam;
+    public float smoothSpeed = 0.1f;
+
     void Awake()
     {
         instance = this;
@@ -120,11 +125,41 @@ public class ReReManager : MonoBehaviour
     }
 
 
+    IEnumerator MoveCameraToTargetAndBack()
+    {
+        // 목표 위치로 이동
+        while (Vector3.Distance(mainCamera.transform.position, createCam.position) > 0.01f)
+        {
+            Vector3 smoothedPosition = Vector3.Lerp(mainCamera.transform.position, createCam.position, smoothSpeed * Time.deltaTime);
+            mainCamera.transform.position = smoothedPosition;
+
+            Quaternion targetRotation = Quaternion.Lerp(mainCamera.transform.rotation, createCam.rotation, smoothSpeed * Time.deltaTime);
+            mainCamera.transform.rotation = targetRotation;
+
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(4); // 목표 위치에서 잠시 대기
+
+        // 원래 위치로 돌아오기
+        while (Vector3.Distance(mainCamera.transform.position, originCam.position) > 0.01f)
+        {
+            Vector3 smoothedPosition = Vector3.Lerp(mainCamera.transform.position, originCam.position, smoothSpeed * Time.deltaTime);
+            mainCamera.transform.position = smoothedPosition;
+
+            Quaternion smoothedRotation = Quaternion.Lerp(mainCamera.transform.rotation, originCam.rotation, smoothSpeed * Time.deltaTime);
+            mainCamera.transform.rotation = smoothedRotation;
+
+            yield return null;
+        }
+    }
+
     void GetPeople()
     {
         // 콜백으로 API 요청 완료 후 실행될 메서드를 지정
         APIManager.Instance.onCompletedRequest = ApplyColorFromAPI;
         APIManager.Instance.GetAPI();
+        StartCoroutine(MoveCameraToTargetAndBack());
     }
 
     void ApplyColorFromAPI()

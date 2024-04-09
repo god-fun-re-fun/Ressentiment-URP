@@ -9,12 +9,16 @@ public class StairAppend : MonoBehaviour
     [SerializeField]
     public float moveSpeed; // 이동 속도
 
+    private Dictionary<GameObject, Coroutine> playerCoroutines = new Dictionary<GameObject, Coroutine>(); // 플레이어별 코루틴 관리
+
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             Rigidbody rb = other.GetComponent<Rigidbody>();
-            StartCoroutine(MoveWithEscalator(other.gameObject, rb));
+            // 코루틴 시작하고 Dictionary에 저장
+            var coroutine = StartCoroutine(MoveWithEscalator(other.gameObject, rb));
+            playerCoroutines[other.gameObject] = coroutine;
         }
     }
 
@@ -22,31 +26,50 @@ public class StairAppend : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            StopCoroutine(MoveWithEscalator(other.gameObject, other.GetComponent<Rigidbody>()));
-            other.GetComponent<Animator>().SetBool("isAppending", false);
+            // Dictionary에서 해당 플레이어의 코루틴 찾아서 중단
+            if (playerCoroutines.TryGetValue(other.gameObject, out Coroutine coroutine))
+            {
+                StopCoroutine(coroutine);
+                playerCoroutines.Remove(other.gameObject); // Dictionary에서 해당 플레이어 제거
+            }
+
+            Animator animator = other.GetComponent<Animator>();
+            if (animator != null)
+            {
+                animator.SetBool("isAppending", false);
+            }
+
             Rigidbody rb = other.GetComponent<Rigidbody>();
-            rb.constraints = RigidbodyConstraints.FreezeRotation;
+            if (rb != null)
+            {
+                rb.constraints = RigidbodyConstraints.FreezeRotation;
+            }
         }
     }
 
     IEnumerator MoveWithEscalator(GameObject playerObject, Rigidbody rb)
     {
-        yield return new WaitForSeconds(1f); // 1초 기다림
-        playerObject.GetComponent<Animator>().SetBool("isAppending", true); // 걷는 애니메이션 활성화
+        yield return new WaitForSeconds(1f);
+        Animator animator = playerObject.GetComponent<Animator>();
+        if (animator != null)
+        {
+            animator.SetBool("isAppending", true);
+        }
+
         rb.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
 
-        // 오브젝트가 에스컬레이터에 있을 때 계속 이동
         while (playerObject != null && playerObject.transform.position.y <= this.transform.position.y + this.transform.localScale.y)
         {
             playerObject.transform.Translate(moveSpeed * moveDirection * Time.deltaTime);
             yield return null;
         }
 
-        // 에스컬레이터에서 내리면 원래 상태로 복구
-        if (playerObject != null)
+        if (playerObject != null && animator != null)
         {
-            playerObject.GetComponent<Animator>().SetBool("isAppending", false);
+            animator.SetBool("isAppending", false);
             rb.constraints = RigidbodyConstraints.FreezeRotation;
+            // 코루틴이 완료되면 자동으로 플레이어를 Dictionary에서 제거
+            playerCoroutines.Remove(playerObject);
         }
     }
 }
