@@ -23,6 +23,9 @@ public class ReReManager : MonoBehaviour
     public Animator headUpReRe02;
 
 
+    public AudioSource gearTrigger;
+
+
     private bool isCoroutineRunning = false; // 코루틴 실행 상태를 추적하는 변수
 
     void Awake()
@@ -175,6 +178,7 @@ public class ReReManager : MonoBehaviour
         // 콜백으로 API 요청 완료 후 실행될 메서드를 지정
         APIManager.Instance.onCompletedRequest = ApplyColorFromAPI;
         APIManager.Instance.GetAPI();
+        gearTrigger.Play();
         StartCoroutine(MoveCameraToTargetAndBack());
         worldSymbol.SetTrigger("Create");
         headUpReRe01.SetTrigger("Create");
@@ -214,6 +218,24 @@ public class ReReManager : MonoBehaviour
 
         // 현재 타겟으로 카메라를 부드럽게 이동
         Transform targetTransform = targets[currentIndex];
+        float range = 0.03f;
+
+        if (currentIndex == 2)
+        {
+            cameraSpeed = 1.5f;
+            range = 0.3f;
+
+        }
+        else if (currentIndex == 3)
+        {
+            cameraSpeed = 1.5f;
+            range = 0.01f;
+        }
+        else
+        {
+            cameraSpeed = 0.6f;
+            range = 0.01f;
+        }
 
         // Lerp 함수를 사용하여 현재 위치와 목표 위치 사이를 부드럽게 이동
         mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position, targetTransform.position, cameraSpeed * Time.deltaTime);
@@ -221,7 +243,7 @@ public class ReReManager : MonoBehaviour
         mainCamera.transform.rotation = Quaternion.Lerp(mainCamera.transform.rotation, targetTransform.rotation, cameraSpeed * Time.deltaTime);
 
         // 카메라가 현재 타겟에 거의 도달했는지 체크 (거리가 매우 가까워졌는지)
-        if (Vector3.Distance(mainCamera.transform.position, targetTransform.position) < 0.03f)
+        if (Vector3.Distance(mainCamera.transform.position, targetTransform.position) < range)
         {
             // 다음 타겟으로 인덱스 업데이트 (순환)
             currentIndex = (currentIndex + 1) % targets.Count;

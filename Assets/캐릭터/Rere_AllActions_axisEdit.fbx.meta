@@ -83,8 +83,8 @@ ModelImporter:
       name: rig|Effecting
       takeName: rig|Effecting
       internalID: 0
-      firstFrame: 0
-      lastFrame: 49
+      firstFrame: 6
+      lastFrame: 38
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
