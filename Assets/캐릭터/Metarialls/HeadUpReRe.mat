@@ -55,7 +55,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _Amplitude: 0
-    - _Fill: 0.28
+    - _Fill: 0.25
     - _FillAmount: 0.27
     - _FoamWidth: 0.01
     - _Foam_Smoothness: 0
