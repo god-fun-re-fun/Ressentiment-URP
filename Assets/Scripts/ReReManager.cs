@@ -222,19 +222,19 @@ public class ReReManager : MonoBehaviour
 
         if (currentIndex == 2)
         {
-            cameraSpeed = 1.5f;
+            cameraSpeed = 1.0f;
             range = 0.3f;
 
         }
         else if (currentIndex == 3)
         {
-            cameraSpeed = 1.5f;
-            range = 0.01f;
+            cameraSpeed = 1.0f;
+            range = 0.005f;
         }
         else
         {
-            cameraSpeed = 0.6f;
-            range = 0.01f;
+            cameraSpeed = 0.3f;
+            range = 0.005f;
         }
 
         // Lerp 함수를 사용하여 현재 위치와 목표 위치 사이를 부드럽게 이동
