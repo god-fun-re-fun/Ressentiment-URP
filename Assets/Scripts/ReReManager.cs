@@ -205,6 +205,11 @@ public class ReReManager : MonoBehaviour
             GetPeople();
         }
 
+        if(Input.GetMouseButtonDown(0) && !isCoroutineRunning)
+        {
+            GetPeople();
+        }
+
         // 코루틴이 실행 중이 아닐 때만 MoveToNextTargetSmoothly() 호출
         if (!isCoroutineRunning)
         {

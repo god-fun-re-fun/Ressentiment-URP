@@ -52,10 +52,15 @@ public class WorldColorManager : MonoBehaviour
 
         _TopColor = new Color(new_r, new_g, new_b);
         sphere.material.SetColor("_TopColor", _TopColor);
-        if(new_g > 0.8)
+        if(new_g >= 0.75)
         {
             grayCity.SetActive(false);
             greenCity.SetActive(true);
+        }
+        else if(new_g < 0.75)
+        {
+            grayCity.SetActive(true);
+            greenCity.SetActive(false);
         }
 
         if(new_r + 0.2 > 1.0f)
