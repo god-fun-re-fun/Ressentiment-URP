@@ -22,8 +22,11 @@ public class ReReManager : MonoBehaviour
     public Animator headUpReRe01;
     public Animator headUpReRe02;
 
+    public string[] tags = { "P1", "P2", "P3" };
 
     public AudioSource gearTrigger;
+    int randomIndex;
+    string selectedTag;
 
 
     private bool isCoroutineRunning = false; // 코루틴 실행 상태를 추적하는 변수
@@ -102,6 +105,8 @@ public class ReReManager : MonoBehaviour
     {
         GameObject nextReRe = Instantiate(ReReManager.instance.prefabPeople, createPos);
 
+        nextReRe.tag = selectedTag;
+
         MeshRenderer meshRenderer = nextReRe.GetComponent<MeshRenderer>();
         if (meshRenderer == null)
         {
@@ -175,6 +180,8 @@ public class ReReManager : MonoBehaviour
 
     void GetPeople()
     {
+        randomIndex = Random.Range(0, tags.Length);
+        selectedTag = tags[randomIndex];
         // 콜백으로 API 요청 완료 후 실행될 메서드를 지정
         APIManager.Instance.onCompletedRequest = ApplyColorFromAPI;
         APIManager.Instance.GetAPI();
