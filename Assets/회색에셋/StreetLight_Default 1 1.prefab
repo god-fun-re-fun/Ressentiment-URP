@@ -34,7 +34,7 @@ Transform:
   - {fileID: 7218366380940622504}
   - {fileID: 8252852295064716143}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &928811628018005396
 GameObject:
@@ -163,6 +163,7 @@ GameObject:
   - component: {fileID: 2877996680505104049}
   - component: {fileID: 8136136160988450623}
   - component: {fileID: 8136136160988450620}
+  - component: {fileID: 1697678966687841572}
   - component: {fileID: 8136136160988450621}
   m_Layer: 0
   m_Name: StreetLight_Light
@@ -249,7 +250,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.0714095, y: 3.9517674, z: 2.3673987}
   m_Center: {x: 0.1507039, y: 0.162713, z: -4.118511}
---- !u!114 &8136136160988450621
+--- !u!114 &1697678966687841572
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -257,6 +258,20 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1061443758843984776}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86a78133a9ba25540862eddc1e1a221d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  changeSpeed: 5
+  light: {fileID: 7427493623490300468}
+--- !u!114 &8136136160988450621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1061443758843984776}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 676d0748de302af45b37030a1ad36d88, type: 3}
   m_Name: 
