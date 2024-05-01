@@ -1,8 +1,35 @@
 fileFormatVersion: 2
-guid: 9b6cd45d71f80d040b3cb82f37ee8ab7
+guid: 815198052206f5246ace97fc7613a216
 ModelImporter:
   serializedVersion: 22103
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: 100605767522865616
+    second: Knob|CubeAction
+  - first:
+      74: 7274900758565341759
+    second: Knob|SunAction
+  - first:
+      74: 2558544655710224042
+    second: Knob|WaterAction
+  - first:
+      74: 17017395923089283
+    second: Cube.001|CubeAction
+  - first:
+      74: 4534572579001818764
+    second: Cube.001|SunAction
+  - first:
+      74: 7731165952125686790
+    second: Cube.001|WaterAction
+  - first:
+      74: 7808550293764175942
+    second: Sphere.001|CubeAction
+  - first:
+      74: -4328172881380723383
+    second: Sphere.001|SunAction
+  - first:
+      74: -6230966147015643339
+    second: Sphere.001|WaterAction
   externalObjects: {}
   materials:
     materialImportMode: 2
