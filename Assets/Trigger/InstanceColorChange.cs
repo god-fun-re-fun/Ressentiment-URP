@@ -29,7 +29,7 @@ public class InstanceColorChange : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("P1") || other.CompareTag("P2") || other.CompareTag("P3"))
+        if (other.CompareTag("P1") || other.CompareTag("P2"))
         {
             GameObject rere = other.gameObject;
             MeshRenderer meshRenderer = rere.GetComponent<MeshRenderer>();
@@ -51,7 +51,7 @@ public class InstanceColorChange : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("P1") || other.CompareTag("P2") || other.CompareTag("P3"))
+        if (other.CompareTag("P1") || other.CompareTag("P2"))
         {
             targetGlassColor = glassColor;
             targetLightColor = lightColor;

@@ -19,7 +19,7 @@ public class ColorInteraction : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("P1") || other.CompareTag("P2") || other.CompareTag("P3"))
+        if (other.CompareTag("P1") || other.CompareTag("P2"))
         {
             GameObject rere = other.gameObject;
             MeshRenderer meshRenderer = rere.GetComponent<MeshRenderer>();

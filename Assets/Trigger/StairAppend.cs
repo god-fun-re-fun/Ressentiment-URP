@@ -13,7 +13,7 @@ public class StairAppend : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("P1") || other.CompareTag("P2") || other.CompareTag("P3"))
+        if (other.CompareTag("P1") || other.CompareTag("P2"))
         {
             Rigidbody rb = other.GetComponent<Rigidbody>();
             // 코루틴 시작하고 Dictionary에 저장
@@ -24,7 +24,7 @@ public class StairAppend : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("P1") || other.CompareTag("P2") || other.CompareTag("P3"))
+        if (other.CompareTag("P1") || other.CompareTag("P2"))
         {
             // Dictionary에서 해당 플레이어의 코루틴 찾아서 중단
             if (playerCoroutines.TryGetValue(other.gameObject, out Coroutine coroutine))

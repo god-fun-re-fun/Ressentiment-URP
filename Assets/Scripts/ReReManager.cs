@@ -22,7 +22,7 @@ public class ReReManager : MonoBehaviour
     public Animator headUpReRe01;
     public Animator headUpReRe02;
 
-    public string[] tags = { "P1", "P2", "P3" };
+    public string[] tags = { "P1", "P2" };
 
     public AudioSource gearTrigger;
     int randomIndex;

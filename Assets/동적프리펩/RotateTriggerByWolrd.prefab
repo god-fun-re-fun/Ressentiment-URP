@@ -58,6 +58,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96099d434bdc8c24994cf089744a0d1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetDirection: {x: 0, y: 0, z: -1}
-  upDirection: {x: 0, y: 1, z: 0}
-  rotateSpeed: 0.4
+  forwardDirectionP1: {x: 0, y: 0, z: 0}
+  upDirectionP1: {x: 0, y: 0, z: 0}
+  forwardDirectionP2: {x: 0, y: 0, z: 0}
+  upDirectionP2: {x: 0, y: 0, z: 0}
+  rotateSpeed: 1
