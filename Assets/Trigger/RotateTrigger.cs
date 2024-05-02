@@ -6,30 +6,17 @@ public class RotateTrigger : MonoBehaviour
 {
     public Vector3 forwardDirectionP1; // 벽을 타고 올라가는 방향
     public Vector3 upDirectionP1; // 캐릭터의 '위' 방향이 될 벡터, 벽의 '옆면' 방향
-    public Vector3 forwardDirectionP2;
-    public Vector3 upDirectionP2;
     public float rotateSpeed = 1f; // 회전 속도
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("P1"))
+        if (other.CompareTag("P1") || other.CompareTag("P2"))
         {
             // 현재 오브젝트의 회전 상태
             Quaternion currentRotation = other.transform.rotation;
 
             // 목표 방향과 '위' 방향으로의 회전 상태
             Quaternion targetRotation = Quaternion.LookRotation(forwardDirectionP1.normalized, upDirectionP1.normalized);
-
-            // 부드러운 회전 처리
-            other.transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotateSpeed * Time.deltaTime);
-        }
-        else if (other.CompareTag("P2"))
-        {
-            // 현재 오브젝트의 회전 상태
-            Quaternion currentRotation = other.transform.rotation;
-
-            // 목표 방향과 '위' 방향으로의 회전 상태
-            Quaternion targetRotation = Quaternion.LookRotation(forwardDirectionP2.normalized, upDirectionP2.normalized);
 
             // 부드러운 회전 처리
             other.transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotateSpeed * Time.deltaTime);
