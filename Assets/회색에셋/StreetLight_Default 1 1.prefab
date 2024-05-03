@@ -23,9 +23,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 737769814886697444}
-  m_LocalRotation: {x: -0.7071068, y: -0.000000030908623, z: -0.000000030908623, w: 0.7071068}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -0.904, y: 3.8439999, z: 5.854}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalScale: {x: 0.7, y: 0.6999999, z: 0.6999999}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8950557775858499166}
@@ -34,8 +34,8 @@ Transform:
   - {fileID: 7218366380940622504}
   - {fileID: 8252852295064716143}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1 &928811628018005396
 GameObject:
   m_ObjectHideFlags: 0
@@ -80,9 +80,9 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95612824, b: 0.83647794, a: 1}
-  m_Intensity: 4.44
-  m_Range: 5.01
+  m_Color: {r: 0.8207547, g: 0.8073704, b: 0.7696511, a: 1}
+  m_Intensity: 1.92
+  m_Range: 5.1
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -164,7 +164,6 @@ GameObject:
   - component: {fileID: 8136136160988450623}
   - component: {fileID: 8136136160988450620}
   - component: {fileID: 1697678966687841572}
-  - component: {fileID: 8136136160988450621}
   m_Layer: 0
   m_Name: StreetLight_Light
   m_TagString: Untagged
@@ -248,8 +247,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.0714095, y: 3.9517674, z: 2.3673987}
-  m_Center: {x: 0.1507039, y: 0.162713, z: -4.118511}
+  m_Size: {x: 4.822213, y: 4.807842, z: 2.3673995}
+  m_Center: {x: 1.2969806, y: -1.2896489, z: -4.1185107}
 --- !u!114 &1697678966687841572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,23 +261,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86a78133a9ba25540862eddc1e1a221d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  changeSpeed: 5
+  changeSpeed: 4
   light: {fileID: 7427493623490300468}
---- !u!114 &8136136160988450621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1061443758843984776}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 676d0748de302af45b37030a1ad36d88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  changeDuration: 3
-  velocity: 5
-  objLight: {fileID: 7427493623490300468}
 --- !u!1 &2467794858749195453
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ public class InstanceColorChange : MonoBehaviour
     public Light light;
 
     private bool isColorChanging = false;
+    private bool isColorReturning = false;
 
     Color glassColor;
     Color lightColor;
@@ -56,7 +57,7 @@ public class InstanceColorChange : MonoBehaviour
             targetGlassColor = glassColor;
             targetLightColor = lightColor;
 
-            isColorChanging = true;
+            isColorReturning = true;
         }
     }
     
@@ -75,6 +76,20 @@ public class InstanceColorChange : MonoBehaviour
                 glassMaterial.color = targetGlassColor; // 목표 색으로 설정
                 light.color = targetLightColor; // 목표 색으로 설정
                 isColorChanging = false; // 색 변화 종료
+            }
+        }
+        if (isColorReturning)
+        {
+            // 보간하여 색상을 부드럽게 변경
+            glassMaterial.SetColor("_EmissionColor", Color.Lerp(glassMaterial.GetColor("_EmissionColor"), targetGlassColor, (changeSpeed / 2) * Time.deltaTime));
+            light.color = Color.Lerp(light.color, targetLightColor, changeSpeed * Time.deltaTime);
+
+            // 목표 색에 근접하면 색 변화 종료
+            if (Vector4.Distance(glassMaterial.color, targetGlassColor) < 0.01f)
+            {
+                glassMaterial.color = targetGlassColor; // 목표 색으로 설정
+                light.color = targetLightColor; // 목표 색으로 설정
+                isColorReturning = false; // 색 변화 종료
             }
         }
     }
