@@ -54,12 +54,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Amplitude: 0
+    - _Amplitude: 3.48
     - _Fill: 0.1
     - _FillAmount: 0.27
     - _FoamWidth: 0.01
     - _Foam_Smoothness: 0
-    - _Frequency: 0
+    - _Frequency: 2.3
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Rim_Power: 1.5
