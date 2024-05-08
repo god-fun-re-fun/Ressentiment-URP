@@ -127,6 +127,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1675247391604897947}
     m_Modifications:
+    - target: {fileID: 2133086507587412107, guid: ada570ca6457f804a88545a8bec6e0c0, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0db4c38d96fdcc64e8d870209c51170e, type: 2}
     - target: {fileID: 2354437266139087274, guid: ada570ca6457f804a88545a8bec6e0c0, type: 3}
       propertyPath: m_Name
       value: Desk
@@ -187,6 +191,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 676c9cb9ad2221d478f7940be787ba89, type: 2}
+    - target: {fileID: 3543785388694698097, guid: ada570ca6457f804a88545a8bec6e0c0, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: de69df44165e05a4aa12aebbe5972bbf, type: 2}
+    - target: {fileID: 8430797776197734908, guid: ada570ca6457f804a88545a8bec6e0c0, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: de69df44165e05a4aa12aebbe5972bbf, type: 2}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: ada570ca6457f804a88545a8bec6e0c0, type: 3}
@@ -195,18 +207,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3201441313664741966, guid: ada570ca6457f804a88545a8bec6e0c0, type: 3}
   m_PrefabInstance: {fileID: 4333878285921243834}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6439590572975865634
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1173410626666651892}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c6648c13773e5546be65bedf91e3f26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &2359497109304862106
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -220,6 +220,33 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 95.921646, y: 1.631628, z: 2.8452368}
   m_Center: {x: -47.460835, y: -1.1755307, z: -0.33326122}
+--- !u!114 &1541131218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1173410626666651892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 624075ee7dcab2245859aee6d8e24aaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  changeSpeed: 2
+  sphere: {fileID: 7909272036393353125}
+--- !u!114 &6439590572975865634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1173410626666651892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c6648c13773e5546be65bedf91e3f26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  changeSpeed: 2
 --- !u!4 &1712058086765922730 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3163625444479720208, guid: ada570ca6457f804a88545a8bec6e0c0, type: 3}
@@ -326,3 +353,8 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!137 &7909272036393353125 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3704139635052304072, guid: 032cb52dcb07baa48bf0c02ba4f70e37, type: 3}
+  m_PrefabInstance: {fileID: 6819820224487565677}
+  m_PrefabAsset: {fileID: 0}

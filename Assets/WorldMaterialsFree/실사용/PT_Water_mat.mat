@@ -66,7 +66,7 @@ Material:
     - _FoamSpeed: 0.5
     - _GlossyReflections: 1
     - _Mettalic: 0.821
-    - _NormalMapWavesSpeed: 0.185
+    - _NormalMapWavesSpeed: 1
     - _NormalMapsWavesSize: 4.2
     - _QueueControl: -1
     - _QueueOffset: 0
@@ -94,10 +94,10 @@ Material:
     - _wavedirectionx: 0.23
     - _wavedirectiony: -0.8
     m_Colors:
-    - _DeepColor: {r: 0, g: 0.97254896, b: 1, a: 0}
+    - _DeepColor: {r: 1, g: 1, b: 1, a: 0.9647059}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _FoamColor: {r: 0, g: 1, b: 0.877095, a: 0}
-    - _ShallowColor: {r: 0, g: 0.8627448, b: 1, a: 0}
+    - _ShallowColor: {r: 1, g: 1, b: 1, a: 1}
     - _Shallowcolor: {r: 0.4890531, g: 0.6480994, b: 0.6603774, a: 0}
     - _deepcolor: {r: 0.3301887, g: 0.1712053, b: 0.07631721, a: 0}
     - _foamcolor: {r: 0.3066038, g: 1, b: 0.9145772, a: 0}
