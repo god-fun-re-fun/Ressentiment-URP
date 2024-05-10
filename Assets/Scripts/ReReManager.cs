@@ -19,8 +19,6 @@ public class ReReManager : MonoBehaviour
     public float waitingTime = 10.0f;
 
     public Animator worldSymbol;
-    public Animator headUpReRe01;
-    public Animator headUpReRe02;
 
     public string[] tags = { "P1", "P2" };
 
@@ -190,8 +188,6 @@ public class ReReManager : MonoBehaviour
         //gearTrigger.Play();
         //StartCoroutine(MoveCameraToTargetAndBack());
         //worldSymbol.SetTrigger("Create");
-        //headUpReRe01.SetTrigger("Create");
-        //headUpReRe02.SetTrigger("Create");
     }
 
     void ApplyColorFromAPI()
