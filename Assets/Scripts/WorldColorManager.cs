@@ -14,7 +14,7 @@ public class WorldColorManager : MonoBehaviour
 
     public float velocity;
 
-    public Light worldLight;
+    //public Light worldLight;
     public Light billboardLight;
 
     public GameObject grayCity;
@@ -75,7 +75,7 @@ public class WorldColorManager : MonoBehaviour
         {
             new_b = 0.8f;
         }
-        worldLight.color = new Color(new_r + 0.2f, new_g + 0.2f, new_b + 0.2f);
+        //worldLight.color = new Color(new_r + 0.2f, new_g + 0.2f, new_b + 0.2f);
         billboardLight.color = new Color(new_r + 0.2f, new_g + 0.2f, new_b + 0.2f);
     }
 

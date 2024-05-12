@@ -13,9 +13,12 @@ public class Walk : MonoBehaviour
 
     private bool move = false; // 플레이어가 이동 중인지 여부
 
+    private GravityControll gravityControll;
+
     private void Start()
     {
         animator = GetComponent<Animator>();
+        gravityControll = GetComponent<GravityControll>();
     }
 
     private void Update()
@@ -45,7 +48,15 @@ public class Walk : MonoBehaviour
         if (waypointIndex < waypoints.Length)
         {
             // 현재 위치에서 다음 웨이포인트를 바라보도록 회전
-            transform.LookAt(waypoints[waypointIndex].position);
+            if (gravityControll.gravityDirection == Vector3.back)
+            {
+                transform.LookAt(waypoints[waypointIndex].position, Vector3.forward);
+            }
+            else
+            {
+                transform.LookAt(waypoints[waypointIndex].position);
+            }
+            
         }
 
         // 목표 포인트에 도착했는지 확인
