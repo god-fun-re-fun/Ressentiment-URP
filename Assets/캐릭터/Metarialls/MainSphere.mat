@@ -45,11 +45,11 @@ Material:
     - _Fill: 0
     - _FillAmount: 0.51
     - _FoamWidth: 0.04
-    - _Foam_Smoothness: 0.2
+    - _Foam_Smoothness: 0.75
     - _Frequency: 0.5
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Rim_Power: 1.52
+    - _Rim_Power: 1.03
     m_Colors:
     - _BottomColor: {r: 0.16037738, g: 0.16037738, b: 0.16037738, a: 1}
     - _FoamColor: {r: 0.6509434, g: 0.6509434, b: 0.6509434, a: 1}

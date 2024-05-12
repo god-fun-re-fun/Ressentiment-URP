@@ -6,7 +6,7 @@ public class ReReChange : MonoBehaviour
 {
     public float changeSpeed = 5.0f; // 색상 변화에 걸리는 시간 (초)
 
-    public Renderer sphere;
+    public Renderer sphere; //바뀌는 애
 
     private bool isColorChanging = false;
     private bool isColorReturning = false;
