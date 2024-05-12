@@ -181,13 +181,13 @@ public class ReReManager : MonoBehaviour
         randomIndex = Random.Range(0, tags.Length);
         selectedTag = tags[randomIndex];
 
-        GameObject nextReRe = Instantiate(ReReManager.instance.prefabPeople, createPos);
+        //GameObject nextReRe = Instantiate(ReReManager.instance.prefabPeople, createPos);
         // 콜백으로 API 요청 완료 후 실행될 메서드를 지정
-        //APIManager.Instance.onCompletedRequest = ApplyColorFromAPI;
-        //APIManager.Instance.GetAPI();
-        //gearTrigger.Play();
-        //StartCoroutine(MoveCameraToTargetAndBack());
-        //worldSymbol.SetTrigger("Create");
+        APIManager.Instance.onCompletedRequest = ApplyColorFromAPI;
+        APIManager.Instance.GetAPI();
+        gearTrigger.Play();
+        StartCoroutine(MoveCameraToTargetAndBack());
+        worldSymbol.SetTrigger("Create");
     }
 
     void ApplyColorFromAPI()
