@@ -54,7 +54,7 @@ Material:
     - _BottomColor: {r: 0.3433962, g: 0.46277875, b: 1, a: 1}
     - _FoamColor: {r: 0.44716978, g: 0.48297012, b: 1, a: 1}
     - _Rim_Color: {r: 0.81509435, g: 0.90799415, b: 1, a: 1}
-    - _TopColor: {r: 0.4078431, g: 0.42966336, b: 1, a: 1}
+    - _TopColor: {r: 0.4078431, g: 0.5112463, b: 1, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &4928124052341844216
 MonoBehaviour:

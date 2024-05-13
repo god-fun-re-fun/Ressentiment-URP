@@ -94,10 +94,10 @@ Material:
     - _wavedirectionx: 0.23
     - _wavedirectiony: -0.8
     m_Colors:
-    - _DeepColor: {r: 0.69983053, g: 0, b: 1, a: 1}
+    - _DeepColor: {r: 0, g: 0.810421, b: 1, a: 1}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _FoamColor: {r: 0.40572405, g: 0, b: 1, a: 1}
-    - _ShallowColor: {r: 0.7092304, g: 0, b: 1, a: 1}
+    - _FoamColor: {r: 0, g: 0.87180185, b: 1, a: 1}
+    - _ShallowColor: {r: 0, g: 0.7622018, b: 1, a: 1}
     - _Shallowcolor: {r: 0.4890531, g: 0.6480994, b: 0.6603774, a: 0}
     - _deepcolor: {r: 0.3301887, g: 0.1712053, b: 0.07631721, a: 0}
     - _foamcolor: {r: 0.3066038, g: 1, b: 0.9145772, a: 0}

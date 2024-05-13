@@ -123,7 +123,7 @@ public class ReReManager : MonoBehaviour
 
         // 2. 유사 색상 생성
         // 색조(Hue)를 약간 조정하여 유사 색상 생성
-        float similarHue1 = (h + 0.07f) % 1.0f; // 색조 조정 (+0.028)
+        float similarHue1 = (h + 0.02f) % 1.0f; // 색조 조정 (+0.028)
         float similarHue2 = (h - 0.07f + 1.0f) % 1.0f; // 색조 조정 (-0.028), 음수 방지를 위해 +1.0f 후 % 1.0f
 
         // 3. HSL에서 RGB로 변환
@@ -131,11 +131,11 @@ public class ReReManager : MonoBehaviour
         Color similarColor2 = HSLToRGB(similarHue2, s, l);
 
         // 4. 유사 색상을 Material에 적용
-        waterRenderer.material.SetColor("_TopColor", baseColor);
-        WorldColorManager.Instance.UpdateWorld_TopColor(baseColor);
+        waterRenderer.material.SetColor("_TopColor", similarColor1);
+        WorldColorManager.Instance.UpdateWorld_TopColor(similarColor1);
         // 유사 색상 1 적용
-        waterRenderer.material.SetColor("_BottomColor", similarColor1);
-        WorldColorManager.Instance.UpdateWorld_BottomColor(similarColor1);
+        waterRenderer.material.SetColor("_BottomColor", baseColor);
+        WorldColorManager.Instance.UpdateWorld_BottomColor(baseColor);
         // 유사 색상 2 적용을 원한다면 다른 머티리얼 혹은 프로퍼티 사용
         waterRenderer.material.SetColor("_Rim_Color", similarColor2);
         WorldColorManager.Instance.UpdateWorld_Rim_Color(similarColor2);
