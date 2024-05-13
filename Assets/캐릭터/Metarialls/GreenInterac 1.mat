@@ -64,7 +64,7 @@ Material:
     - _QueueOffset: 0
     - _Rim_Power: 1.05
     m_Colors:
-    - _BottomColor: {r: 0.21806297, g: 0.745283, b: 0.2137415, a: 1}
+    - _BottomColor: {r: 0.21806297, g: 0.68235296, b: 0.2137415, a: 1}
     - _FoamColor: {r: 0.91055024, g: 1, b: 0.9098039, a: 1}
     - _Rim_Color: {r: 0.7804913, g: 0.7924528, b: 0.7804913, a: 1}
     - _TopColor: {r: 0.4208615, g: 0.8679245, b: 0.45422444, a: 1}
