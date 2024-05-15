@@ -236,6 +236,7 @@ public class ReReManager : MonoBehaviour
         Transform targetTransform = targets[currentIndex];
         float range = 0.03f;
 
+        /*
         if (currentIndex == 2)
         {
             cameraSpeed = 1.0f;
@@ -252,6 +253,7 @@ public class ReReManager : MonoBehaviour
             cameraSpeed = 0.3f;
             range = 0.005f;
         }
+        */
 
         // Lerp 함수를 사용하여 현재 위치와 목표 위치 사이를 부드럽게 이동
         mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position, targetTransform.position, cameraSpeed * Time.deltaTime);
