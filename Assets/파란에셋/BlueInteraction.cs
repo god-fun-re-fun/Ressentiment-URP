@@ -25,7 +25,7 @@ public class BlueInteraction : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("P1") || other.CompareTag("P2"))
+        if (other.CompareTag("P1"))
         {
             animator.SetBool("isEffecting", true);
 
@@ -45,7 +45,7 @@ public class BlueInteraction : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("P1") || other.CompareTag("P2"))
+        if (other.CompareTag("P1"))
         {
             targetRereColor = rereColor;
             isColorReturning = true;

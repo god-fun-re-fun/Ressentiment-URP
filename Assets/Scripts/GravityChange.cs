@@ -8,7 +8,7 @@ public class GravityChange : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("P1") || other.CompareTag("P2"))
+        if(other.CompareTag("P1"))
         {
             GravityControll gravityControll = other.GetComponent<GravityControll>();
             gravityControll.setGravityDirection(gravity);

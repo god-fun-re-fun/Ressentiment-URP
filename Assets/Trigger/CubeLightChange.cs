@@ -24,7 +24,7 @@ public class CubeLightChange : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("P1") || other.CompareTag("P2"))
+        if (other.CompareTag("P1"))
         {
             GameObject rere = other.gameObject;
             MeshRenderer meshRenderer = rere.GetComponent<MeshRenderer>();
@@ -45,7 +45,7 @@ public class CubeLightChange : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("P1") || other.CompareTag("P2"))
+        if (other.CompareTag("P1"))
         {
             targetGlassColor = glassColor;
 

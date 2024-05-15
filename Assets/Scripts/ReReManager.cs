@@ -20,7 +20,7 @@ public class ReReManager : MonoBehaviour
 
     public Animator worldSymbol;
 
-    public string[] tags = { "P1", "P2" };
+    //public string[] tags = { "P1", "P2" };
 
     public AudioSource gearTrigger;
     int randomIndex;
@@ -178,8 +178,8 @@ public class ReReManager : MonoBehaviour
 
     void GetPeople()
     {
-        randomIndex = Random.Range(0, tags.Length);
-        selectedTag = tags[randomIndex];
+        //randomIndex = Random.Range(0, tags.Length);
+        //selectedTag = tags[randomIndex];
 
         //GameObject nextReRe = Instantiate(ReReManager.instance.prefabPeople, createPos);
         // 콜백으로 API 요청 완료 후 실행될 메서드를 지정
@@ -205,6 +205,7 @@ public class ReReManager : MonoBehaviour
 
     void Update()
     {
+        /* 기존.
         if (Input.GetKeyDown(KeyCode.Space) && !isCoroutineRunning)
         {
             GetPeople();
@@ -214,12 +215,17 @@ public class ReReManager : MonoBehaviour
         {
             GetPeople();
         }
+        
 
         // 코루틴이 실행 중이 아닐 때만 MoveToNextTargetSmoothly() 호출
         if (!isCoroutineRunning)
         {
             MoveToNextTargetSmoothly();
         }
+        */
+
+        //웹빌드용
+        MoveToNextTargetSmoothly();
     }
 
     void MoveToNextTargetSmoothly()

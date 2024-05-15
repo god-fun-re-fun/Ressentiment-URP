@@ -9,7 +9,7 @@ public class RotateY : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("P1") || other.CompareTag("P2"))
+        if (other.CompareTag("P1"))
         {
             // 시작 각도, 목표 각도, 회전에 걸리는 시간을 인자로 전달합니다.
             StartCoroutine(RotateOverTime(other.transform, Y, 0.1f));

@@ -19,7 +19,7 @@ public class GravityControll : MonoBehaviour
     {
         // Rigidbody 컴포넌트 가져오기
         rb = GetComponent<Rigidbody>();
-        setGravityDirection(new Vector3(0, -1, 0));
+        setGravityDirection(gravityDirection);
     }
 
     // 중력의 크기 설정 (기본값인 9.81 * 2 = 19.62을 변경하려면 원하는 값을 설정합니다.)
