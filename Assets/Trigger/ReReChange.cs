@@ -22,7 +22,7 @@ public class ReReChange : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("P1") || other.CompareTag("P2"))
+        if (other.CompareTag("P1"))
         {
             GameObject rere = other.gameObject;
             MeshRenderer meshRenderer = rere.GetComponent<MeshRenderer>();
@@ -43,7 +43,7 @@ public class ReReChange : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("P1") || other.CompareTag("P2"))
+        if (other.CompareTag("P1"))
         {
             targetRereColor = rereColor;
 

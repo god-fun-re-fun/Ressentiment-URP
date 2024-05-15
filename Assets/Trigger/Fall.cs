@@ -22,7 +22,7 @@ public class Fall : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("P1") || other.CompareTag("P2"))
+        if (other.CompareTag("P1"))
         {
             other.GetComponent<Animator>().SetBool("isWatching", true);
             // 코루틴 시작 시 other를 인자로 전달

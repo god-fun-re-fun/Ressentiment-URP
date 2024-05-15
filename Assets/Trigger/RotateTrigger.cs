@@ -10,7 +10,7 @@ public class RotateTrigger : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("P1") || other.CompareTag("P2"))
+        if (other.CompareTag("P1"))
         {
             // 현재 오브젝트의 회전 상태
             Quaternion currentRotation = other.transform.rotation;

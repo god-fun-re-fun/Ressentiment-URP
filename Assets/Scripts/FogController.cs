@@ -16,8 +16,10 @@ public class FogController : MonoBehaviour
     public Material blueSky;
     void Start()
     {
-        RenderSettings.fogColor = grayFogColor; // 안개 색상 설정
-        RenderSettings.fogDensity = grayFogDensity; // 안개 밀도 설정
+        //RenderSettings.fogColor = grayFogColor; // 안개 색상 설정
+        //RenderSettings.fogDensity = grayFogDensity; // 안개 밀도 설정
+        RenderSettings.fogColor = greenFogColor;
+        RenderSettings.fogDensity = greenFogDensity;
     }
 
     public void ToGray()

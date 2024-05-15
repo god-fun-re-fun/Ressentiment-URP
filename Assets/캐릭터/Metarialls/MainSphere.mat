@@ -51,10 +51,10 @@ Material:
     - _QueueOffset: 0
     - _Rim_Power: 1.03
     m_Colors:
-    - _BottomColor: {r: 0.16037738, g: 0.16037738, b: 0.16037738, a: 1}
-    - _FoamColor: {r: 0.6509434, g: 0.6509434, b: 0.6509434, a: 1}
+    - _BottomColor: {r: 0.18895036, g: 0.4245283, b: 0.14217694, a: 1}
+    - _FoamColor: {r: 0.63750225, g: 0.6698113, b: 0.635057, a: 1}
     - _Rim_Color: {r: 1, g: 1, b: 1, a: 1}
-    - _TopColor: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
+    - _TopColor: {r: 0.47160435, g: 0.735849, b: 0.4130473, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &4928124052341844216
 MonoBehaviour:

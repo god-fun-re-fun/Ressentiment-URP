@@ -20,6 +20,7 @@ public class WorldColorManager : MonoBehaviour
     public GameObject grayCity;
     public GameObject greenCity;
 
+
     void Awake()
     {
         // 싱글톤 인스턴스를 초기화합니다.
