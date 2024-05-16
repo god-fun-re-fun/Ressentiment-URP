@@ -9,6 +9,7 @@ public class MoveTrain : MonoBehaviour
     public Transform position3; // 최종 위치
     public float speed = 1.0f; // 이동 속도
     public float waitTime = 30.0f; // 위치 2에서 대기하는 시간(초)
+    public AudioSource metroSound;
 
     void Start()
     {
@@ -35,6 +36,7 @@ public class MoveTrain : MonoBehaviour
 
     IEnumerator MoveToPosition(Vector3 target)
     {
+        metroSound.Play();
         // 현재 위치에서 목표 위치까지 이동합니다.
         while (Vector3.Distance(transform.position, target) > 0.01f)
         {
