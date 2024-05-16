@@ -59,7 +59,7 @@ public class WorldColorManager : MonoBehaviour
         _Rim_Color = sphere.material.GetColor("_Rim_Color");
     }
 
-    bool IsGray(double r, double g, double b, double tolerance = 0.05)
+    bool IsGray(double r, double g, double b, double tolerance = 0.2)
     {
         return Math.Abs(r - g) <= tolerance && Math.Abs(g - b) <= tolerance && Math.Abs(r - b) <= tolerance;
     }
