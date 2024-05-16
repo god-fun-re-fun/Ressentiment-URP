@@ -19,6 +19,8 @@ public class ReReManager : MonoBehaviour
     public float waitingTime = 10.0f;
 
     public Animator worldSymbol;
+    public Animator worldSymbolGreen;
+    public Animator worldSymbolBlue;
 
     //public string[] tags = { "P1", "P2" };
 
@@ -103,7 +105,7 @@ public class ReReManager : MonoBehaviour
     {
         GameObject nextReRe = Instantiate(ReReManager.instance.prefabPeople, createPos);
 
-        nextReRe.tag = selectedTag;
+        //nextReRe.tag = selectedTag;
 
         MeshRenderer meshRenderer = nextReRe.GetComponent<MeshRenderer>();
         if (meshRenderer == null)
@@ -148,7 +150,7 @@ public class ReReManager : MonoBehaviour
         isCoroutineRunning = true;
 
         // 목표 위치로 이동
-        while (Vector3.Distance(mainCamera.transform.position, createCam.position) > 0.01f)
+        while (Vector3.Distance(mainCamera.transform.position, createCam.position) > 0.1f)
         {
             Vector3 smoothedPosition = Vector3.Lerp(mainCamera.transform.position, createCam.position, smoothSpeed * Time.deltaTime);
             mainCamera.transform.position = smoothedPosition;
@@ -162,7 +164,7 @@ public class ReReManager : MonoBehaviour
         yield return new WaitForSeconds(waitingTime); // 목표 위치에서 잠시 대기
 
         // 원래 위치로 돌아오기
-        while (Vector3.Distance(mainCamera.transform.position, originCam.position) > 0.01f)
+        while (Vector3.Distance(mainCamera.transform.position, originCam.position) > 0.1f)
         {
             Vector3 smoothedPosition = Vector3.Lerp(mainCamera.transform.position, originCam.position, smoothSpeed * Time.deltaTime);
             mainCamera.transform.position = smoothedPosition;
@@ -188,6 +190,8 @@ public class ReReManager : MonoBehaviour
         gearTrigger.Play();
         StartCoroutine(MoveCameraToTargetAndBack());
         worldSymbol.SetTrigger("Create");
+        worldSymbolBlue.SetTrigger("Create");
+        worldSymbolGreen.SetTrigger("Create");
     }
 
     void ApplyColorFromAPI()
@@ -233,7 +237,7 @@ public class ReReManager : MonoBehaviour
 
         // 현재 타겟으로 카메라를 부드럽게 이동
         Transform targetTransform = targets[currentIndex];
-        float range = 0.03f;
+        float range = 1.0f;
 
         /*
         if (currentIndex == 2)
