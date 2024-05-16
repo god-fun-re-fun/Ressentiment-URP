@@ -205,7 +205,7 @@ public class ReReManager : MonoBehaviour
 
     void Update()
     {
-        /* 기존.
+        // 기존.
         if (Input.GetKeyDown(KeyCode.Space) && !isCoroutineRunning)
         {
             GetPeople();
@@ -222,10 +222,9 @@ public class ReReManager : MonoBehaviour
         {
             MoveToNextTargetSmoothly();
         }
-        */
 
         //웹빌드용
-        MoveToNextTargetSmoothly();
+        //MoveToNextTargetSmoothly();
     }
 
     void MoveToNextTargetSmoothly()
