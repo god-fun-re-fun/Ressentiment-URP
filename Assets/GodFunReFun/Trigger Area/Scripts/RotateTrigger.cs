@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class RotateTrigger : MonoBehaviour
 {
-    public Vector3 forwardDirectionP1; // º®À» Å¸°í ¿Ã¶ó°¡´Â ¹æÇâ
-    public Vector3 upDirectionP1; // Ä³¸¯ÅÍÀÇ 'À§' ¹æÇâÀÌ µÉ º¤ÅÍ, º®ÀÇ '¿·¸é' ¹æÇâ
-    public float rotateSpeed = 1f; // È¸Àü ¼Óµµ
+    public Vector3 forwardDirectionP1; // ë²½ì„ íƒ€ê³  ì˜¬ë¼ê°€ëŠ” ë°©í–¥
+    public Vector3 upDirectionP1; // ìºë¦­í„°ì˜ 'ìœ„' ë°©í–¥ì´ ë  ë²¡í„°, ë²½ì˜ 'ì˜†ë©´' ë°©í–¥
+    public float rotateSpeed = 1f; // íšŒì „ ì†ë„
 
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("P1"))
         {
-            // ÇöÀç ¿ÀºêÁ§Æ®ÀÇ È¸Àü »óÅÂ
+            // í˜„ì¬ ì˜¤ë¸Œì íŠ¸ì˜ íšŒì „ ìƒíƒœ
             Quaternion currentRotation = other.transform.rotation;
 
-            // ¸ñÇ¥ ¹æÇâ°ú 'À§' ¹æÇâÀ¸·ÎÀÇ È¸Àü »óÅÂ
+            // ëª©í‘œ ë°©í–¥ê³¼ 'ìœ„' ë°©í–¥ìœ¼ë¡œì˜ íšŒì „ ìƒíƒœ
             Quaternion targetRotation = Quaternion.LookRotation(forwardDirectionP1.normalized, upDirectionP1.normalized);
 
-            // ºÎµå·¯¿î È¸Àü Ã³¸®
+            // ë¶€ë“œëŸ¬ìš´ íšŒì „ ì²˜ë¦¬
             other.transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotateSpeed * Time.deltaTime);
         }
     }
@@ -31,30 +31,30 @@ public class RotateTrigger : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            // ½ÃÀÛ °¢µµ, ¸ñÇ¥ °¢µµ, È¸Àü¿¡ °É¸®´Â ½Ã°£À» ÀÎÀÚ·Î Àü´ŞÇÕ´Ï´Ù.
+            // ì‹œì‘ ê°ë„, ëª©í‘œ ê°ë„, íšŒì „ì— ê±¸ë¦¬ëŠ” ì‹œê°„ì„ ì¸ìë¡œ ì „ë‹¬í•©ë‹ˆë‹¤.
             StartCoroutine(RotateOverTime(other.transform, Y, 1f));
         }
     }
 
-    // ÄÚ·çÆ¾À» Á¤ÀÇÇÕ´Ï´Ù. targetÀº È¸Àü½ÃÅ³ ´ë»ó, angleÀº È¸ÀüÇÒ °¢µµ, durationÀº È¸Àü¿¡ °É¸®´Â ½Ã°£ÀÔ´Ï´Ù.
+    // ì½”ë£¨í‹´ì„ ì •ì˜í•©ë‹ˆë‹¤. targetì€ íšŒì „ì‹œí‚¬ ëŒ€ìƒ, angleì€ íšŒì „í•  ê°ë„, durationì€ íšŒì „ì— ê±¸ë¦¬ëŠ” ì‹œê°„ì…ë‹ˆë‹¤.
     IEnumerator RotateOverTime(Transform target, float angle, float duration)
     {
-        yield return new WaitForSeconds(2f); // 2ÃÊ ´ë±â
+        yield return new WaitForSeconds(2f); // 2ì´ˆ ëŒ€ê¸°
 
-        Quaternion originalRotation = target.rotation; // ½ÃÀÛ È¸Àü°ªÀ» ÀúÀåÇÕ´Ï´Ù.
-        Quaternion targetRotation = originalRotation * Quaternion.Euler(0, angle, 0); // ¸ñÇ¥ È¸Àü°ªÀ» °è»êÇÕ´Ï´Ù.
+        Quaternion originalRotation = target.rotation; // ì‹œì‘ íšŒì „ê°’ì„ ì €ì¥í•©ë‹ˆë‹¤.
+        Quaternion targetRotation = originalRotation * Quaternion.Euler(0, angle, 0); // ëª©í‘œ íšŒì „ê°’ì„ ê³„ì‚°í•©ë‹ˆë‹¤.
 
-        float elapsedTime = 0; // °æ°ú ½Ã°£À» ÃßÀûÇÕ´Ï´Ù.
+        float elapsedTime = 0; // ê²½ê³¼ ì‹œê°„ì„ ì¶”ì í•©ë‹ˆë‹¤.
 
         while (elapsedTime < duration)
         {
-            // °æ°ú ½Ã°£À» ±âÁØÀ¸·Î ÇöÀç È¸Àü°ªÀ» °è»êÇÕ´Ï´Ù. Lerp ÇÔ¼ö´Â µÎ È¸Àü°ª »çÀÌ¸¦ ºÎµå·´°Ô º¸°£ÇÕ´Ï´Ù.
+            // ê²½ê³¼ ì‹œê°„ì„ ê¸°ì¤€ìœ¼ë¡œ í˜„ì¬ íšŒì „ê°’ì„ ê³„ì‚°í•©ë‹ˆë‹¤. Lerp í•¨ìˆ˜ëŠ” ë‘ íšŒì „ê°’ ì‚¬ì´ë¥¼ ë¶€ë“œëŸ½ê²Œ ë³´ê°„í•©ë‹ˆë‹¤.
             target.rotation = Quaternion.Lerp(originalRotation, targetRotation, elapsedTime / duration);
-            elapsedTime += Time.deltaTime; // °æ°ú ½Ã°£À» ¾÷µ¥ÀÌÆ®ÇÕ´Ï´Ù.
-            yield return null; // ´ÙÀ½ ÇÁ·¹ÀÓ±îÁö ´ë±âÇÕ´Ï´Ù.
+            elapsedTime += Time.deltaTime; // ê²½ê³¼ ì‹œê°„ì„ ì—…ë°ì´íŠ¸í•©ë‹ˆë‹¤.
+            yield return null; // ë‹¤ìŒ í”„ë ˆì„ê¹Œì§€ ëŒ€ê¸°í•©ë‹ˆë‹¤.
         }
 
-        // ÃÖÁ¾ ¸ñÇ¥ È¸Àü°ªÀ» Àû¿ëÇÕ´Ï´Ù. ÀÌ´Â Á¤È®ÇÑ È¸Àü°ªÀ» º¸ÀåÇÏ±â À§ÇÔÀÔ´Ï´Ù.
+        // ìµœì¢… ëª©í‘œ íšŒì „ê°’ì„ ì ìš©í•©ë‹ˆë‹¤. ì´ëŠ” ì •í™•í•œ íšŒì „ê°’ì„ ë³´ì¥í•˜ê¸° ìœ„í•¨ì…ë‹ˆë‹¤.
         target.rotation = targetRotation;
     }
     */

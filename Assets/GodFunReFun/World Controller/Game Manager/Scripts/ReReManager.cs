@@ -202,6 +202,7 @@ public class ReReManager : MonoBehaviour
         isCoroutineRunning = false;
     }
 
+    [SerializeField] Color c;
     void GetPeople()
     {
         //randomIndex = Random.Range(0, tags.Length);
@@ -209,10 +210,15 @@ public class ReReManager : MonoBehaviour
 
         //GameObject nextReRe = Instantiate(ReReManager.instance.prefabPeople, createPos);
         // 콜백으로 API 요청 완료 후 실행될 메서드를 지정
-        APIManager.Instance.onCompletedRequest = ApplyColorFromAPI;
-        APIManager.Instance.GetAPI();
+
+        //서버 있을 때
+        /*APIManager.Instance.onCompletedRequest = ApplyColorFromAPI;
+        APIManager.Instance.GetAPI();*/
+        ApplySimilarColors(c); // 서버 없을 때
+
+
         gearTrigger.Play();
-        StartCoroutine(MoveCameraToTargetAndBack());
+        //StartCoroutine(MoveCameraToTargetAndBack());
         worldSymbol.SetTrigger("Create");
         worldSymbolBlue.SetTrigger("Create");
         worldSymbolGreen.SetTrigger("Create");

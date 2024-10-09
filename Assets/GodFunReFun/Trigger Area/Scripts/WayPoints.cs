@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WayPoints : MonoBehaviour
 {
-    public Transform[] waypoints01; // ÀÌµ¿ÇÒ °æ·Î Æ÷ÀÎÆ®µé
+    public Transform[] waypoints01; // ì´ë™í•  ê²½ë¡œ í¬ì¸íŠ¸ë“¤
     public float wps01percent;
 
     public Transform[] waypoints02;
@@ -13,39 +13,39 @@ public class WayPoints : MonoBehaviour
     public Transform[] waypoints03;
     public float wps03percent;
 
-    public float waitTime = 0.1f; // °È±â Àü ´ë±â½Ã°£
+    public float waitTime = 0.1f; // ê±·ê¸° ì „ ëŒ€ê¸°ì‹œê°„
 
-    private Walk playerMovement; // Walk Å¬·¡½º¸¦ ÂüÁ¶ÇÒ º¯¼ö
+    private Walk playerMovement; // Walk í´ë˜ìŠ¤ë¥¼ ì°¸ì¡°í•  ë³€ìˆ˜
 
-    // ÇÃ·¹ÀÌ¾î°¡ ÀÌ ¿µ¿ª¿¡ ÁøÀÔÇßÀ» ¶§ È£ÃâµÉ ¸Ş¼Òµå
+    // í”Œë ˆì´ì–´ê°€ ì´ ì˜ì—­ì— ì§„ì…í–ˆì„ ë•Œ í˜¸ì¶œë  ë©”ì†Œë“œ
     public void OnTriggerEnter(Collider other)
     {
         float randomValue = Random.value;
 
-        playerMovement = other.GetComponent<Walk>(); // Walk ÄÄÆ÷³ÍÆ® ÂüÁ¶
+        playerMovement = other.GetComponent<Walk>(); // Walk ì»´í¬ë„ŒíŠ¸ ì°¸ì¡°
         if (playerMovement != null)
         {
-            // ´ë±â ½Ã°£ ÈÄ¿¡ ÀÌµ¿ ¸Ş¼Òµå È£Ãâ
+            // ëŒ€ê¸° ì‹œê°„ í›„ì— ì´ë™ ë©”ì†Œë“œ í˜¸ì¶œ
             Invoke("MoveAfterWait", waitTime);
         }
     }
 
-    // ´ë±â ÈÄ¿¡ È£ÃâµÉ ÇÔ¼ö
+    // ëŒ€ê¸° í›„ì— í˜¸ì¶œë  í•¨ìˆ˜
     void MoveAfterWait()
     {
         float randomValue = Random.value;
 
         if (randomValue < wps01percent)
         {
-            playerMovement.SetWaypoints(waypoints01); // ÇÃ·¹ÀÌ¾î¿¡°Ô ¿şÀÌÆ÷ÀÎÆ® Àü´Ş
+            playerMovement.SetWaypoints(waypoints01); // í”Œë ˆì´ì–´ì—ê²Œ ì›¨ì´í¬ì¸íŠ¸ ì „ë‹¬
         }
         else if (randomValue >= wps01percent && randomValue < wps02percent)
         {
-            playerMovement.SetWaypoints(waypoints02); // ÇÃ·¹ÀÌ¾î¿¡°Ô ¿şÀÌÆ÷ÀÎÆ® Àü´Ş
+            playerMovement.SetWaypoints(waypoints02); // í”Œë ˆì´ì–´ì—ê²Œ ì›¨ì´í¬ì¸íŠ¸ ì „ë‹¬
         }
         else if (randomValue >= wps02percent && randomValue < wps03percent)
         {
-            playerMovement.SetWaypoints(waypoints03); // ÇÃ·¹ÀÌ¾î¿¡°Ô ¿şÀÌÆ÷ÀÎÆ® Àü´Ş
+            playerMovement.SetWaypoints(waypoints03); // í”Œë ˆì´ì–´ì—ê²Œ ì›¨ì´í¬ì¸íŠ¸ ì „ë‹¬
         }
     }
 }

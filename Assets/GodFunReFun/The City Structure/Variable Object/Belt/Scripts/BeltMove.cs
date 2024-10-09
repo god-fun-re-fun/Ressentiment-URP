@@ -7,26 +7,30 @@ public class BeltMove : MonoBehaviour
     float speed;
     Rigidbody rb;
     Animator animator;
+    Vector3 forwardDirection;
+    Vector3 pos;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-        //ÇöÀç ½ÇÇàÁßÀÎ ¾Ö´Ï¸ŞÀÌ¼ÇÀÇ ¼Óµµ¸¦ °¡Á®¿È                                                         x,z 0.2·Î ÁÙÀÏ½Ã 0.35¹è
-        speed = animator.GetCurrentAnimatorClipInfo(0)[0].clip.length / animator.GetCurrentAnimatorStateInfo(0).length * 0.35F;
+
+        // í˜„ì¬ ì˜¤ë¸Œì íŠ¸ì˜ ì „ë°© ë°©í–¥
+        forwardDirection = transform.right;
+
+        pos = rb.position;
+
+        //í˜„ì¬ ì‹¤í–‰ì¤‘ì¸ ì• ë‹ˆë©”ì´ì…˜ì˜ ì†ë„ë¥¼ ê°€ì ¸ì˜´                                                         x,z 0.2ë¡œ ì¤„ì¼ì‹œ 0.35ë°°
+        speed = animator.GetCurrentAnimatorClipInfo(0)[0].clip.length 
+                    / animator.GetCurrentAnimatorStateInfo(0).length * 0.35F;
     }
 
     void FixedUpdate()
     {
-        // ÇöÀç ¿ÀºêÁ§Æ®ÀÇ Àü¹æ ¹æÇâ
-        Vector3 forwardDirection = transform.right;
-
-        Vector3 pos = rb.position;
-
-        // º§Æ®ÀÇ ÀÌµ¿ º¤ÅÍ °è»ê (Àü¹æ ¹æÇâ ±âÁØ)
+        // ë²¨íŠ¸ì˜ ì´ë™ ë²¡í„° ê³„ì‚° (ì „ë°© ë°©í–¥ ê¸°ì¤€)
         rb.position += forwardDirection * speed * Time.fixedDeltaTime;
 
-        // ÀÌµ¿ Àû¿ë
+        // ì´ë™ ì ìš©
         rb.MovePosition(pos);
     }
 }

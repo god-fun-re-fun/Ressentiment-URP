@@ -5,18 +5,18 @@ using UnityEngine;
 public class StairAppend : MonoBehaviour
 {
     [SerializeField]
-    Vector3 moveDirection; // ¹ßÆÇÀÇ ÀÌµ¿ ¹æÇâ
+    Vector3 moveDirection; // ë°œíŒì˜ ì´ë™ ë°©í–¥
     [SerializeField]
-    public float moveSpeed; // ÀÌµ¿ ¼Óµµ
+    public float moveSpeed; // ì´ë™ ì†ë„
 
-    private Dictionary<GameObject, Coroutine> playerCoroutines = new Dictionary<GameObject, Coroutine>(); // ÇÃ·¹ÀÌ¾îº° ÄÚ·çÆ¾ °ü¸®
+    private Dictionary<GameObject, Coroutine> playerCoroutines = new Dictionary<GameObject, Coroutine>(); // í”Œë ˆì´ì–´ë³„ ì½”ë£¨í‹´ ê´€ë¦¬
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("P1"))
         {
             Rigidbody rb = other.GetComponent<Rigidbody>();
-            // ÄÚ·çÆ¾ ½ÃÀÛÇÏ°í Dictionary¿¡ ÀúÀå
+            // ì½”ë£¨í‹´ ì‹œì‘í•˜ê³  Dictionaryì— ì €ì¥
             var coroutine = StartCoroutine(MoveWithEscalator(other.gameObject, rb));
             playerCoroutines[other.gameObject] = coroutine;
         }
@@ -26,11 +26,11 @@ public class StairAppend : MonoBehaviour
     {
         if (other.CompareTag("P1"))
         {
-            // Dictionary¿¡¼­ ÇØ´ç ÇÃ·¹ÀÌ¾îÀÇ ÄÚ·çÆ¾ Ã£¾Æ¼­ Áß´Ü
+            // Dictionaryì—ì„œ í•´ë‹¹ í”Œë ˆì´ì–´ì˜ ì½”ë£¨í‹´ ì°¾ì•„ì„œ ì¤‘ë‹¨
             if (playerCoroutines.TryGetValue(other.gameObject, out Coroutine coroutine))
             {
                 StopCoroutine(coroutine);
-                playerCoroutines.Remove(other.gameObject); // Dictionary¿¡¼­ ÇØ´ç ÇÃ·¹ÀÌ¾î Á¦°Å
+                playerCoroutines.Remove(other.gameObject); // Dictionaryì—ì„œ í•´ë‹¹ í”Œë ˆì´ì–´ ì œê±°
             }
 
             Animator animator = other.GetComponent<Animator>();
@@ -68,7 +68,7 @@ public class StairAppend : MonoBehaviour
         {
             animator.SetBool("isAppending", false);
             rb.constraints = RigidbodyConstraints.FreezeRotation;
-            // ÄÚ·çÆ¾ÀÌ ¿Ï·áµÇ¸é ÀÚµ¿À¸·Î ÇÃ·¹ÀÌ¾î¸¦ Dictionary¿¡¼­ Á¦°Å
+            // ì½”ë£¨í‹´ì´ ì™„ë£Œë˜ë©´ ìë™ìœ¼ë¡œ í”Œë ˆì´ì–´ë¥¼ Dictionaryì—ì„œ ì œê±°
             playerCoroutines.Remove(playerObject);
         }
     }

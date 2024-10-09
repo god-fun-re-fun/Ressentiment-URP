@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class ReReChange : MonoBehaviour
 {
-    public float changeSpeed = 5.0f; // »ö»ó º¯È­¿¡ °É¸®´Â ½Ã°£ (ÃÊ)
+    public float changeSpeed = 5.0f; // ìƒ‰ìƒ ë³€í™”ì— ê±¸ë¦¬ëŠ” ì‹œê°„ (ì´ˆ)
 
-    public Renderer sphere; //¹Ù²î´Â ¾Ö
+    public Renderer sphere; //ë°”ë€ŒëŠ” ì• 
 
     private bool isColorChanging = false;
     private bool isColorReturning = false;
@@ -56,25 +56,25 @@ public class ReReChange : MonoBehaviour
     {
         if (isColorChanging)
         {
-            // º¸°£ÇÏ¿© »ö»óÀ» ºÎµå·´°Ô º¯°æ
+            // ë³´ê°„í•˜ì—¬ ìƒ‰ìƒì„ ë¶€ë“œëŸ½ê²Œ ë³€ê²½
             sphere.material.SetColor("_Rim_Color", Color.Lerp(sphere.material.GetColor("_Rim_Color"), targetRereColor, changeSpeed * Time.deltaTime));
 
-            // ¸ñÇ¥ »ö¿¡ ±ÙÁ¢ÇÏ¸é »ö º¯È­ Á¾·á
+            // ëª©í‘œ ìƒ‰ì— ê·¼ì ‘í•˜ë©´ ìƒ‰ ë³€í™” ì¢…ë£Œ
             if (Vector4.Distance(sphere.material.GetColor("_Rim_Color"), targetRereColor) < 0.01f)
             {
-                sphere.material.SetColor("_Rim_Color", targetRereColor); // ¸ñÇ¥ »öÀ¸·Î ¼³Á¤
-                isColorChanging = false; // »ö º¯È­ Á¾·á
+                sphere.material.SetColor("_Rim_Color", targetRereColor); // ëª©í‘œ ìƒ‰ìœ¼ë¡œ ì„¤ì •
+                isColorChanging = false; // ìƒ‰ ë³€í™” ì¢…ë£Œ
             }
         }
         if (isColorReturning)
         {
-            // º¸°£ÇÏ¿© »ö»óÀ» ºÎµå·´°Ô º¯°æ
+            // ë³´ê°„í•˜ì—¬ ìƒ‰ìƒì„ ë¶€ë“œëŸ½ê²Œ ë³€ê²½
             sphere.material.SetColor("_Rim_Color", Color.Lerp(sphere.material.GetColor("_Rim_Color"), targetRereColor, changeSpeed * Time.deltaTime));
-            
+
             if (Vector4.Distance(sphere.material.GetColor("_Rim_Color"), targetRereColor) < 0.01f)
             {
-                sphere.material.SetColor("_Rim_Color", targetRereColor); // ¸ñÇ¥ »öÀ¸·Î ¼³Á¤
-                isColorReturning = false; // »ö º¯È­ Á¾·á                                           
+                sphere.material.SetColor("_Rim_Color", targetRereColor); // ëª©í‘œ ìƒ‰ìœ¼ë¡œ ì„¤ì •
+                isColorReturning = false; // ìƒ‰ ë³€í™” ì¢…ë£Œ                                           
             }
         }
     }

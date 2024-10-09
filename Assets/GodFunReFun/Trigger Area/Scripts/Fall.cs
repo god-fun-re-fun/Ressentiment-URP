@@ -9,15 +9,13 @@ public class Fall : MonoBehaviour
 
     IEnumerator WaitOneSecondCoroutine(Collider player)
     {
-        // 1ÃÊ µ¿¾È ½ÇÇàÀ» ÀÏ½Ã ÁßÁöÇÕ´Ï´Ù.
+        // ì‹¤í–‰ì„ ì¼ì‹œ ì¤‘ì§€í•©ë‹ˆë‹¤.
         yield return new WaitForSeconds(standingTime);
 
-        // ´ë±â°¡ ¿Ï·áµÈ ÈÄ setGravityDirection È£Ãâ
+        // ëŒ€ê¸°ê°€ ì™„ë£Œëœ í›„ setGravityDirection í˜¸ì¶œ
         GravityControll gravityControll = player.GetComponent<GravityControll>();
-        if (gravityControll != null) // null Ã¼Å© Ãß°¡
-        {
-            gravityControll.setGravityDirection(gravity);
-        }
+
+        gravityControll?.setGravityDirection(gravity);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -25,7 +23,7 @@ public class Fall : MonoBehaviour
         if (other.CompareTag("P1"))
         {
             other.GetComponent<Animator>().SetBool("isWatching", true);
-            // ÄÚ·çÆ¾ ½ÃÀÛ ½Ã other¸¦ ÀÎÀÚ·Î Àü´Ş
+            // ì½”ë£¨í‹´ ì‹œì‘ ì‹œ otherë¥¼ ì¸ìë¡œ ì „ë‹¬
             StartCoroutine(WaitOneSecondCoroutine(other));
         }
     }

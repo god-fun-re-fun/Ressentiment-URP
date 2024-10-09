@@ -4,24 +4,24 @@ using UnityEngine;
 
 public class FloatObject : MonoBehaviour
 {
-    public float amplitude = 0.5f; // ¿òÁ÷ÀÓÀÇ Å©±â
-    public float frequency = 1f; // ¿òÁ÷ÀÓÀÇ ¼Óµµ
+    public float amplitude = 0.5f; // ì›€ì§ì„ì˜ í¬ê¸°
+    public float frequency = 1f; // ì›€ì§ì„ì˜ ì†ë„
 
-    // ½ÃÀÛ À§Ä¡¸¦ ÀúÀåÇÒ º¯¼ö
+    // ì‹œì‘ ìœ„ì¹˜ë¥¼ ì €ì¥í•  ë³€ìˆ˜
     private Vector3 startPos;
 
     void Start()
     {
-        // ¿ÀºêÁ§Æ®ÀÇ ½ÃÀÛ À§Ä¡¸¦ ÀúÀå
+        // ì˜¤ë¸Œì íŠ¸ì˜ ì‹œì‘ ìœ„ì¹˜ë¥¼ ì €ì¥
         startPos = transform.position;
     }
 
     void Update()
     {
-        // ½Ã°£¿¡ µû¶ó º¯ÇÏ´Â °ª »ı¼º
+        // ì‹œê°„ì— ë”°ë¼ ë³€í•˜ëŠ” ê°’ ìƒì„±
         float tempPos = amplitude * Mathf.Sin(Time.time * frequency);
 
-        // ¿ÀºêÁ§Æ®ÀÇ À§Ä¡¸¦ »óÇÏ·Î ¿òÁ÷ÀÓ
+        // ì˜¤ë¸Œì íŠ¸ì˜ ìœ„ì¹˜ë¥¼ ìƒí•˜ë¡œ ì›€ì§ì„
         transform.position = new Vector3(startPos.x, startPos.y + tempPos, startPos.z);
     }
 }

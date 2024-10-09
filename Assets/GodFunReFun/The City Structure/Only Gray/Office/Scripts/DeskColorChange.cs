@@ -5,21 +5,19 @@ using UnityEngine;
 
 public class DeskColorChange : MonoBehaviour
 {
-    public float changeSpeed = 5.0f; // »ö»ó º¯È­¿¡ °É¸®´Â ½Ã°£ (ÃÊ)
+    public float changeSpeed = 5.0f; // ìƒ‰ìƒ ë³€í™”ì— ê±¸ë¦¬ëŠ” ì‹œê°„ (ì´ˆ)
 
-    private Material screenMaterial; // ¿ÀºêÁ§Æ®ÀÇ Material
+    private Material screenMaterial; // ì˜¤ë¸Œì íŠ¸ì˜ Material
 
     private bool isColorChanging = false;
     private bool isColorReturning = false;
 
     Color screenColor;
-
     Color targetScreenColor;
 
     void Start()
     {
         screenMaterial = GetComponent<Renderer>().material;
-
         screenColor = screenMaterial.GetColor("_EmissionColor");
     }
 
@@ -35,11 +33,8 @@ public class DeskColorChange : MonoBehaviour
             }
 
             Transform waterTransform = rere.transform.Find("Sphere");
-
             Renderer waterRenderer = waterTransform.GetComponent<SkinnedMeshRenderer>();
-
             targetScreenColor = waterRenderer.material.GetColor("_TopColor");
-
             isColorChanging = true;
         }
     }
@@ -49,7 +44,6 @@ public class DeskColorChange : MonoBehaviour
         if (other.CompareTag("P1"))
         {
             targetScreenColor = screenColor;
-
             isColorReturning = true;
         }
     }
@@ -59,26 +53,26 @@ public class DeskColorChange : MonoBehaviour
     {
         if (isColorChanging)
         {
-            // º¸°£ÇÏ¿© »ö»óÀ» ºÎµå·´°Ô º¯°æ
+            // ë³´ê°„í•˜ì—¬ ìƒ‰ìƒì„ ë¶€ë“œëŸ½ê²Œ ë³€ê²½
             screenMaterial.SetColor("_EmissionColor", Color.Lerp(screenMaterial.GetColor("_EmissionColor"), targetScreenColor, changeSpeed * Time.deltaTime));
 
-            // ¸ñÇ¥ »ö¿¡ ±ÙÁ¢ÇÏ¸é »ö º¯È­ Á¾·á
+            // ëª©í‘œ ìƒ‰ì— ê·¼ì ‘í•˜ë©´ ìƒ‰ ë³€í™” ì¢…ë£Œ
             if (Vector4.Distance(screenMaterial.color, targetScreenColor) < 0.01f)
             {
-                screenMaterial.color = targetScreenColor; // ¸ñÇ¥ »öÀ¸·Î ¼³Á¤
-                isColorChanging = false; // »ö º¯È­ Á¾·á
+                screenMaterial.color = targetScreenColor; // ëª©í‘œ ìƒ‰ìœ¼ë¡œ ì„¤ì •
+                isColorChanging = false; // ìƒ‰ ë³€í™” ì¢…ë£Œ
             }
         }
         if (isColorReturning)
         {
-            // º¸°£ÇÏ¿© »ö»óÀ» ºÎµå·´°Ô º¯°æ
-            screenMaterial.SetColor("_EmissionColor", Color.Lerp(screenMaterial.GetColor("_EmissionColor"), targetScreenColor, (changeSpeed/4) * Time.deltaTime));
+            // ë³´ê°„í•˜ì—¬ ìƒ‰ìƒì„ ë¶€ë“œëŸ½ê²Œ ë³€ê²½
+            screenMaterial.SetColor("_EmissionColor", Color.Lerp(screenMaterial.GetColor("_EmissionColor"), targetScreenColor, (changeSpeed / 4) * Time.deltaTime));
 
-            // ¸ñÇ¥ »ö¿¡ ±ÙÁ¢ÇÏ¸é »ö º¯È­ Á¾·á
+            // ëª©í‘œ ìƒ‰ì— ê·¼ì ‘í•˜ë©´ ìƒ‰ ë³€í™” ì¢…ë£Œ
             if (Vector4.Distance(screenMaterial.color, targetScreenColor) < 0.01f)
             {
-                screenMaterial.color = targetScreenColor; // ¸ñÇ¥ »öÀ¸·Î ¼³Á¤
-                isColorReturning = false; // »ö º¯È­ Á¾·á
+                screenMaterial.color = targetScreenColor; // ëª©í‘œ ìƒ‰ìœ¼ë¡œ ì„¤ì •
+                isColorReturning = false; // ìƒ‰ ë³€í™” ì¢…ë£Œ
             }
         }
     }
