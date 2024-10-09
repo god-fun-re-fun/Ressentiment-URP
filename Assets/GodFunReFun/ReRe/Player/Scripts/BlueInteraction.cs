@@ -35,7 +35,7 @@ public class BlueInteraction : MonoBehaviour
             {
                 meshRenderer = rere.AddComponent<MeshRenderer>();
             }
-            
+
             Transform waterTransform = rere.transform.Find("Sphere");
             Renderer waterRenderer = waterTransform.GetComponent<SkinnedMeshRenderer>();
             targetRereColor = waterRenderer.material.GetColor("_TopColor");
@@ -58,27 +58,27 @@ public class BlueInteraction : MonoBehaviour
     {
         if (isColorChanging)
         {
-            // º¸°£ÇÏ¿© »ö»óÀ» ºÎµå·´°Ô º¯°æ
+            // ë³´ê°„í•˜ì—¬ ìƒ‰ìƒì„ ë¶€ë“œëŸ½ê²Œ ë³€ê²½
             rereHead.material.SetColor("_Rim_Color", Color.Lerp(rereHead.material.GetColor("_Rim_Color"), targetRereColor, changeSpeed * Time.deltaTime));
 
             blueSphereYRotation += 0.1f;
             blueSphere.Rotate(0.0f, blueSphereYRotation, 0.0f);
-            // ¸ñÇ¥ »ö¿¡ ±ÙÁ¢ÇÏ¸é »ö º¯È­ Á¾·á
+            // ëª©í‘œ ìƒ‰ì— ê·¼ì ‘í•˜ë©´ ìƒ‰ ë³€í™” ì¢…ë£Œ
             if (Vector4.Distance(rereHead.material.GetColor("_Rim_Color"), targetRereColor) < 0.01f)
             {
-                rereHead.material.SetColor("_Rim_Color", targetRereColor); // ¸ñÇ¥ »öÀ¸·Î ¼³Á¤
-                isColorChanging = false; // »ö º¯È­ Á¾·á
+                rereHead.material.SetColor("_Rim_Color", targetRereColor); // ëª©í‘œ ìƒ‰ìœ¼ë¡œ ì„¤ì •
+                isColorChanging = false; // ìƒ‰ ë³€í™” ì¢…ë£Œ
             }
         }
         if (isColorReturning)
         {
-            // º¸°£ÇÏ¿© »ö»óÀ» ºÎµå·´°Ô º¯°æ
+            // ë³´ê°„í•˜ì—¬ ìƒ‰ìƒì„ ë¶€ë“œëŸ½ê²Œ ë³€ê²½
             rereHead.material.SetColor("_Rim_Color", Color.Lerp(rereHead.material.GetColor("_Rim_Color"), targetRereColor, changeSpeed * Time.deltaTime));
 
             if (Vector4.Distance(rereHead.material.GetColor("_Rim_Color"), targetRereColor) < 0.01f)
             {
-                rereHead.material.SetColor("_Rim_Color", targetRereColor); // ¸ñÇ¥ »öÀ¸·Î ¼³Á¤
-                isColorReturning = false; // »ö º¯È­ Á¾·á                                           
+                rereHead.material.SetColor("_Rim_Color", targetRereColor); // ëª©í‘œ ìƒ‰ìœ¼ë¡œ ì„¤ì •
+                isColorReturning = false; // ìƒ‰ ë³€í™” ì¢…ë£Œ                                           
             }
         }
     }

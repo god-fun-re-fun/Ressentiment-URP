@@ -16,8 +16,8 @@ public class FogController : MonoBehaviour
     public Material blueSky;
     void Start()
     {
-        //RenderSettings.fogColor = grayFogColor; // ¾È°³ »ö»ó ¼³Á¤
-        //RenderSettings.fogDensity = grayFogDensity; // ¾È°³ ¹Ğµµ ¼³Á¤
+        //RenderSettings.fogColor = grayFogColor; // ì•ˆê°œ ìƒ‰ìƒ ì„¤ì •
+        //RenderSettings.fogDensity = grayFogDensity; // ì•ˆê°œ ë°€ë„ ì„¤ì •
         ToGray();
     }
 

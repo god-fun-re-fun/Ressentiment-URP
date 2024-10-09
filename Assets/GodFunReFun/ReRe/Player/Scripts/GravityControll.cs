@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class GravityControll : MonoBehaviour
 {
-    // Rigidbody ÄÄÆ÷³ÍÆ®¸¦ ÀúÀåÇÒ º¯¼ö
+    // Rigidbody ì»´í¬ë„ŒíŠ¸ë¥¼ ì €ì¥í•  ë³€ìˆ˜
     private Rigidbody rb;
-    // ¿øÇÏ´Â ¹æÇâÀÇ Áß·ÂÀ» ¼³Á¤ÇÒ ¼ö ÀÖ½À´Ï´Ù.
-    // ¿¹¸¦ µé¾î, ¾Æ·¡ÂÊÀ¸·ÎÀÇ Áß·ÂÀ» ¼³Á¤ÇÏ·Á¸é (0, -1, 0)À¸·Î ¼³Á¤ÇÕ´Ï´Ù.
-    public Vector3 gravityDirection = new Vector3(0,-1,0);
+    // ì›í•˜ëŠ” ë°©í–¥ì˜ ì¤‘ë ¥ì„ ì„¤ì •í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
+    // ì˜ˆë¥¼ ë“¤ì–´, ì•„ë˜ìª½ìœ¼ë¡œì˜ ì¤‘ë ¥ì„ ì„¤ì •í•˜ë ¤ë©´ (0, -1, 0)ìœ¼ë¡œ ì„¤ì •í•©ë‹ˆë‹¤.
+    public Vector3 gravityDirection = new Vector3(0, -1, 0);
 
     public void setGravityDirection(Vector3 v)
     {
@@ -17,12 +17,12 @@ public class GravityControll : MonoBehaviour
 
     void Start()
     {
-        // Rigidbody ÄÄÆ÷³ÍÆ® °¡Á®¿À±â
+        // Rigidbody ì»´í¬ë„ŒíŠ¸ ê°€ì ¸ì˜¤ê¸°
         rb = GetComponent<Rigidbody>();
         setGravityDirection(gravityDirection);
     }
 
-    // Áß·ÂÀÇ Å©±â ¼³Á¤ (±âº»°ªÀÎ 9.81 * 2 = 19.62À» º¯°æÇÏ·Á¸é ¿øÇÏ´Â °ªÀ» ¼³Á¤ÇÕ´Ï´Ù.)
+    // ì¤‘ë ¥ì˜ í¬ê¸° ì„¤ì • (ê¸°ë³¸ê°’ì¸ 9.81 * 2 = 19.62ì„ ë³€ê²½í•˜ë ¤ë©´ ì›í•˜ëŠ” ê°’ì„ ì„¤ì •í•©ë‹ˆë‹¤.)
     float gravityMagnitude = 9.81f;
 
     private void FixedUpdate()

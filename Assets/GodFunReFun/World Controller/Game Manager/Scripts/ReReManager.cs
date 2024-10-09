@@ -10,9 +10,9 @@ public class ReReManager : MonoBehaviour
     public GameObject prefabPeople;
 
     public Camera mainCamera;
-    public List<Transform> targets; // Ä«¸Ş¶ó°¡ ÀÌµ¿ÇÒ Å¸°Ù Transform ¸®½ºÆ®
-    public float cameraSpeed = 0.1f;      // Ä«¸Ş¶ó ÀÌµ¿ ¼Óµµ
-    private int currentIndex = 0;   // ÇöÀç Å¸°Ù ÀÎµ¦½º
+    public List<Transform> targets; // ì¹´ë©”ë¼ê°€ ì´ë™í•  íƒ€ê²Ÿ Transform ë¦¬ìŠ¤íŠ¸
+    public float cameraSpeed = 0.1f;      // ì¹´ë©”ë¼ ì´ë™ ì†ë„
+    private int currentIndex = 0;   // í˜„ì¬ íƒ€ê²Ÿ ì¸ë±ìŠ¤
     public Transform createCam;
     public Transform originCam;
     public float smoothSpeed = 0.1f;
@@ -29,11 +29,35 @@ public class ReReManager : MonoBehaviour
     string selectedTag;
 
 
-    private bool isCoroutineRunning = false; // ÄÚ·çÆ¾ ½ÇÇà »óÅÂ¸¦ ÃßÀûÇÏ´Â º¯¼ö
+    private bool isCoroutineRunning = false; // ì½”ë£¨í‹´ ì‹¤í–‰ ìƒíƒœë¥¼ ì¶”ì í•˜ëŠ” ë³€ìˆ˜
 
     void Awake()
     {
         instance = this;
+    }
+
+    void Update()
+    {
+        // ê¸°ì¡´.
+        if (Input.GetKeyDown(KeyCode.Space) && !isCoroutineRunning)
+        {
+            GetPeople();
+        }
+
+        if (Input.GetMouseButtonDown(0) && !isCoroutineRunning)
+        {
+            GetPeople();
+        }
+
+
+        // ì½”ë£¨í‹´ì´ ì‹¤í–‰ ì¤‘ì´ ì•„ë‹ ë•Œë§Œ MoveToNextTargetSmoothly() í˜¸ì¶œ
+        if (!isCoroutineRunning)
+        {
+            MoveToNextTargetSmoothly();
+        }
+
+        //ì›¹ë¹Œë“œìš©
+        //MoveToNextTargetSmoothly();
     }
 
     public void RGBToHSL(Color rgbColor, out float h, out float s, out float l)
@@ -119,26 +143,26 @@ public class ReReManager : MonoBehaviour
         Renderer waterRenderer = waterTransform.GetComponent<SkinnedMeshRenderer>();
         Light light = lightTransform.GetComponent<Light>();
 
-        // 1. RGB¿¡¼­ HSL·Î º¯È¯
+        // 1. RGBì—ì„œ HSLë¡œ ë³€í™˜
         float h, s, l;
         RGBToHSL(baseColor, out h, out s, out l);
 
-        // 2. À¯»ç »ö»ó »ı¼º
-        // »öÁ¶(Hue)¸¦ ¾à°£ Á¶Á¤ÇÏ¿© À¯»ç »ö»ó »ı¼º
-        float similarHue1 = (h + 0.02f) % 1.0f; // »öÁ¶ Á¶Á¤ (+0.028)
-        float similarHue2 = (h - 0.07f + 1.0f) % 1.0f; // »öÁ¶ Á¶Á¤ (-0.028), À½¼ö ¹æÁö¸¦ À§ÇØ +1.0f ÈÄ % 1.0f
+        // 2. ìœ ì‚¬ ìƒ‰ìƒ ìƒì„±
+        // ìƒ‰ì¡°(Hue)ë¥¼ ì•½ê°„ ì¡°ì •í•˜ì—¬ ìœ ì‚¬ ìƒ‰ìƒ ìƒì„±
+        float similarHue1 = (h + 0.02f) % 1.0f; // ìƒ‰ì¡° ì¡°ì • (+0.028)
+        float similarHue2 = (h - 0.07f + 1.0f) % 1.0f; // ìƒ‰ì¡° ì¡°ì • (-0.028), ìŒìˆ˜ ë°©ì§€ë¥¼ ìœ„í•´ +1.0f í›„ % 1.0f
 
-        // 3. HSL¿¡¼­ RGB·Î º¯È¯
+        // 3. HSLì—ì„œ RGBë¡œ ë³€í™˜
         Color similarColor1 = HSLToRGB(similarHue1, s, l);
         Color similarColor2 = HSLToRGB(similarHue2, s, l);
 
-        // 4. À¯»ç »ö»óÀ» Material¿¡ Àû¿ë
+        // 4. ìœ ì‚¬ ìƒ‰ìƒì„ Materialì— ì ìš©
         waterRenderer.material.SetColor("_TopColor", similarColor1);
         WorldColorManager.Instance.UpdateWorld_TopColor(similarColor1);
-        // À¯»ç »ö»ó 1 Àû¿ë
+        // ìœ ì‚¬ ìƒ‰ìƒ 1 ì ìš©
         waterRenderer.material.SetColor("_BottomColor", baseColor);
         WorldColorManager.Instance.UpdateWorld_BottomColor(baseColor);
-        // À¯»ç »ö»ó 2 Àû¿ëÀ» ¿øÇÑ´Ù¸é ´Ù¸¥ ¸ÓÆ¼¸®¾ó È¤Àº ÇÁ·ÎÆÛÆ¼ »ç¿ë
+        // ìœ ì‚¬ ìƒ‰ìƒ 2 ì ìš©ì„ ì›í•œë‹¤ë©´ ë‹¤ë¥¸ ë¨¸í‹°ë¦¬ì–¼ í˜¹ì€ í”„ë¡œí¼í‹° ì‚¬ìš©
         waterRenderer.material.SetColor("_Rim_Color", similarColor2);
         WorldColorManager.Instance.UpdateWorld_Rim_Color(similarColor2);
         light.color = similarColor2;
@@ -149,7 +173,7 @@ public class ReReManager : MonoBehaviour
     {
         isCoroutineRunning = true;
 
-        // ¸ñÇ¥ À§Ä¡·Î ÀÌµ¿
+        // ëª©í‘œ ìœ„ì¹˜ë¡œ ì´ë™
         while (Vector3.Distance(mainCamera.transform.position, createCam.position) > 0.1f)
         {
             Vector3 smoothedPosition = Vector3.Lerp(mainCamera.transform.position, createCam.position, smoothSpeed * Time.deltaTime);
@@ -161,9 +185,9 @@ public class ReReManager : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSeconds(waitingTime); // ¸ñÇ¥ À§Ä¡¿¡¼­ Àá½Ã ´ë±â
+        yield return new WaitForSeconds(waitingTime); // ëª©í‘œ ìœ„ì¹˜ì—ì„œ ì ì‹œ ëŒ€ê¸°
 
-        // ¿ø·¡ À§Ä¡·Î µ¹¾Æ¿À±â
+        // ì›ë˜ ìœ„ì¹˜ë¡œ ëŒì•„ì˜¤ê¸°
         while (Vector3.Distance(mainCamera.transform.position, originCam.position) > 0.1f)
         {
             Vector3 smoothedPosition = Vector3.Lerp(mainCamera.transform.position, originCam.position, smoothSpeed * Time.deltaTime);
@@ -184,7 +208,7 @@ public class ReReManager : MonoBehaviour
         //selectedTag = tags[randomIndex];
 
         //GameObject nextReRe = Instantiate(ReReManager.instance.prefabPeople, createPos);
-        // Äİ¹éÀ¸·Î API ¿äÃ» ¿Ï·á ÈÄ ½ÇÇàµÉ ¸Ş¼­µå¸¦ ÁöÁ¤
+        // ì½œë°±ìœ¼ë¡œ API ìš”ì²­ ì™„ë£Œ í›„ ì‹¤í–‰ë  ë©”ì„œë“œë¥¼ ì§€ì •
         APIManager.Instance.onCompletedRequest = ApplyColorFromAPI;
         APIManager.Instance.GetAPI();
         gearTrigger.Play();
@@ -196,7 +220,7 @@ public class ReReManager : MonoBehaviour
 
     void ApplyColorFromAPI()
     {
-        // APIManagerÀÇ responseData¸¦ »ç¿ëÇÏ¿© »ö»ó Àû¿ë ·ÎÁ÷
+        // APIManagerì˜ responseDataë¥¼ ì‚¬ìš©í•˜ì—¬ ìƒ‰ìƒ ì ìš© ë¡œì§
         if (APIManager.Instance.responseData != null && APIManager.Instance.responseData.data != null)
         {
             double R = APIManager.Instance.responseData.data.r;
@@ -207,35 +231,12 @@ public class ReReManager : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        // ±âÁ¸.
-        if (Input.GetKeyDown(KeyCode.Space) && !isCoroutineRunning)
-        {
-            GetPeople();
-        }
-
-        if(Input.GetMouseButtonDown(0) && !isCoroutineRunning)
-        {
-            GetPeople();
-        }
-        
-
-        // ÄÚ·çÆ¾ÀÌ ½ÇÇà ÁßÀÌ ¾Æ´Ò ¶§¸¸ MoveToNextTargetSmoothly() È£Ãâ
-        if (!isCoroutineRunning)
-        {
-            MoveToNextTargetSmoothly();
-        }
-
-        //À¥ºôµå¿ë
-        //MoveToNextTargetSmoothly();
-    }
 
     void MoveToNextTargetSmoothly()
     {
-        if (targets.Count == 0) return; // Å¸°ÙÀÌ ¾øÀ¸¸é ÇÔ¼ö Á¾·á
+        if (targets.Count == 0) return; // íƒ€ê²Ÿì´ ì—†ìœ¼ë©´ í•¨ìˆ˜ ì¢…ë£Œ
 
-        // ÇöÀç Å¸°ÙÀ¸·Î Ä«¸Ş¶ó¸¦ ºÎµå·´°Ô ÀÌµ¿
+        // í˜„ì¬ íƒ€ê²Ÿìœ¼ë¡œ ì¹´ë©”ë¼ë¥¼ ë¶€ë“œëŸ½ê²Œ ì´ë™
         Transform targetTransform = targets[currentIndex];
         float range = 1.0f;
 
@@ -258,15 +259,15 @@ public class ReReManager : MonoBehaviour
         }
         */
 
-        // Lerp ÇÔ¼ö¸¦ »ç¿ëÇÏ¿© ÇöÀç À§Ä¡¿Í ¸ñÇ¥ À§Ä¡ »çÀÌ¸¦ ºÎµå·´°Ô ÀÌµ¿
+        // Lerp í•¨ìˆ˜ë¥¼ ì‚¬ìš©í•˜ì—¬ í˜„ì¬ ìœ„ì¹˜ì™€ ëª©í‘œ ìœ„ì¹˜ ì‚¬ì´ë¥¼ ë¶€ë“œëŸ½ê²Œ ì´ë™
         mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position, targetTransform.position, cameraSpeed * Time.deltaTime);
 
         mainCamera.transform.rotation = Quaternion.Lerp(mainCamera.transform.rotation, targetTransform.rotation, cameraSpeed * Time.deltaTime);
 
-        // Ä«¸Ş¶ó°¡ ÇöÀç Å¸°Ù¿¡ °ÅÀÇ µµ´ŞÇß´ÂÁö Ã¼Å© (°Å¸®°¡ ¸Å¿ì °¡±î¿öÁ³´ÂÁö)
+        // ì¹´ë©”ë¼ê°€ í˜„ì¬ íƒ€ê²Ÿì— ê±°ì˜ ë„ë‹¬í–ˆëŠ”ì§€ ì²´í¬ (ê±°ë¦¬ê°€ ë§¤ìš° ê°€ê¹Œì›Œì¡ŒëŠ”ì§€)
         if (Vector3.Distance(mainCamera.transform.position, targetTransform.position) < range)
         {
-            // ´ÙÀ½ Å¸°ÙÀ¸·Î ÀÎµ¦½º ¾÷µ¥ÀÌÆ® (¼øÈ¯)
+            // ë‹¤ìŒ íƒ€ê²Ÿìœ¼ë¡œ ì¸ë±ìŠ¤ ì—…ë°ì´íŠ¸ (ìˆœí™˜)
             currentIndex = (currentIndex + 1) % targets.Count;
         }
     }

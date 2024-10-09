@@ -6,7 +6,7 @@ using System.Net;
 
 public class APIManager : MonoBehaviour
 {
-    // ½Ì±ÛÅæ ÀÎ½ºÅÏ½º
+    // ì‹±ê¸€í†¤ ì¸ìŠ¤í„´ìŠ¤
     private static APIManager _instance;
     public static APIManager Instance { get { return _instance; } }
 
@@ -17,7 +17,7 @@ public class APIManager : MonoBehaviour
 
     private void Awake()
     {
-        // ½Ì±ÛÅæ ÀÎ½ºÅÏ½º¸¦ ¼³Á¤
+        // ì‹±ê¸€í†¤ ì¸ìŠ¤í„´ìŠ¤ë¥¼ ì„¤ì •
         if (_instance != null && _instance != this)
         {
             Destroy(this.gameObject);
@@ -28,7 +28,7 @@ public class APIManager : MonoBehaviour
         }
     }
 
-    // Äİ¹é ÇÔ¼ö¸¦ À§ÇÑ Action ¼±¾ğ
+    // ì½œë°± í•¨ìˆ˜ë¥¼ ìœ„í•œ Action ì„ ì–¸
     public System.Action onCompletedRequest;
 
     public void GetAPI()
@@ -38,25 +38,25 @@ public class APIManager : MonoBehaviour
 
     IEnumerator GetRequest(string url)
     {
-        // º¸¾È ÇÁ·ÎÅäÄİ ¼³Á¤ (HTTP »ç¿ë)
+        // ë³´ì•ˆ í”„ë¡œí† ì½œ ì„¤ì • (HTTP ì‚¬ìš©)
         ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12 | SecurityProtocolType.Ssl3;
 
         using (UnityWebRequest webRequest = UnityWebRequest.Get(url))
         {
-            // ¿äÃ»À» º¸³À´Ï´Ù.
+            // ìš”ì²­ì„ ë³´ëƒ„
             yield return webRequest.SendWebRequest();
 
-            // ¿À·ù Ã³¸®
+            // ì˜¤ë¥˜ ì²˜ë¦¬
             if (webRequest.result != UnityWebRequest.Result.Success)
             {
                 Debug.LogError(webRequest.error);
             }
             else
             {
-                // ¼º°øÀûÀ¸·Î ¹ŞÀº °æ¿ì
+                // ì„±ê³µì ìœ¼ë¡œ ë°›ì€ ê²½ìš°
                 responseData = JsonUtility.FromJson<ResponseDto>(webRequest.downloadHandler.text);
 
-                // Äİ¹é È£Ãâ
+                // ì½œë°± í˜¸ì¶œ
                 if (onCompletedRequest != null)
                 {
                     onCompletedRequest.Invoke();

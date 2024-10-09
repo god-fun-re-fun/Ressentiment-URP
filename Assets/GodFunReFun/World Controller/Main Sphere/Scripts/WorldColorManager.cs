@@ -37,7 +37,7 @@ public class WorldColorManager : MonoBehaviour
 
     void Awake()
     {
-        // ½Ì±ÛÅæ ÀÎ½ºÅÏ½º¸¦ ÃÊ±âÈ­ÇÕ´Ï´Ù.
+        // ì‹±ê¸€í†¤ ì¸ìŠ¤í„´ìŠ¤ë¥¼ ì´ˆê¸°í™”
         if (_instance == null)
         {
             _instance = this;
@@ -51,7 +51,6 @@ public class WorldColorManager : MonoBehaviour
 
     void Start()
     {
-        // Renderer ÄÄÆ÷³ÍÆ®¸¦ °¡Á®¿É´Ï´Ù.
         sphere = GetComponent<Renderer>();
 
         _TopColor = sphere.material.GetColor("_TopColor");
@@ -66,12 +65,12 @@ public class WorldColorManager : MonoBehaviour
 
     void CloneAndActivateGray()
     {
-        if(clonedBlue)
+        if (clonedBlue)
         {
             clonedBlue = false;
             Destroy(cloneBlue);
         }
-        if(clonedGreen)
+        if (clonedGreen)
         {
             clonedGreen = false;
             Destroy(cloneGreen);
@@ -127,26 +126,26 @@ public class WorldColorManager : MonoBehaviour
 
         _TopColor = new Color(new_r, new_g, new_b);
         sphere.material.SetColor("_TopColor", _TopColor);
-        
-        if(IsGray(new_r,new_g,new_b))
+
+        if (IsGray(new_r, new_g, new_b))
         {
-            if(clonedGray == false)
+            if (clonedGray == false)
             {
                 CloneAndActivateGray();
             }
-            
+
             blueCity.SetActive(false);
             greenCity.SetActive(false);
             grayCity.SetActive(true);
             fogController.ToGray();
         }
-        else if(new_g >= 0.75)
+        else if (new_g >= 0.75)
         {
-            if(clonedGreen == false)
+            if (clonedGreen == false)
             {
                 CloneAndActivateGreen();
             }
-            
+
             grayCity.SetActive(false);
             blueCity.SetActive(false);
             greenCity.SetActive(true);
@@ -154,11 +153,11 @@ public class WorldColorManager : MonoBehaviour
         }
         else if (new_b >= 0.75)
         {
-            if(clonedBlue == false)
+            if (clonedBlue == false)
             {
                 CloneAndActivateBlue();
             }
-            
+
             grayCity.SetActive(false);
             greenCity.SetActive(false);
             blueCity.SetActive(true);
@@ -170,11 +169,11 @@ public class WorldColorManager : MonoBehaviour
         {
             new_r = 0.8f;
         }
-        if(new_g + 0.2 > 1.0f)
+        if (new_g + 0.2 > 1.0f)
         {
             new_g = 0.8f;
         }
-        if(new_b + 0.2 > 1.0f)
+        if (new_b + 0.2 > 1.0f)
         {
             new_b = 0.8f;
         }
