@@ -158,14 +158,16 @@ public class ReReManager : MonoBehaviour
 
         // 4. 유사 색상을 Material에 적용
         waterRenderer.material.SetColor("_TopColor", similarColor1);
-        WorldColorManager.Instance.UpdateWorld_TopColor(similarColor1);
+        WorldColorManager.Instance.UpdateTopColor(similarColor1);
         // 유사 색상 1 적용
         waterRenderer.material.SetColor("_BottomColor", baseColor);
-        WorldColorManager.Instance.UpdateWorld_BottomColor(baseColor);
+        WorldColorManager.Instance.UpdateBottomColor(baseColor);
         // 유사 색상 2 적용을 원한다면 다른 머티리얼 혹은 프로퍼티 사용
         waterRenderer.material.SetColor("_Rim_Color", similarColor2);
-        WorldColorManager.Instance.UpdateWorld_Rim_Color(similarColor2);
+        WorldColorManager.Instance.UpdateRimColor(similarColor2);
         light.color = similarColor2;
+
+        WorldColorManager.Instance.UpdateWorld(similarColor1);
     }
 
 

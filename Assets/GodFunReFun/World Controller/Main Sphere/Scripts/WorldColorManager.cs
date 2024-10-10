@@ -117,71 +117,28 @@ public class WorldColorManager : MonoBehaviour
         clonedBlue = true;
     }
 
-
-    public void UpdateWorld_TopColor(Color rere)
+    public void UpdateWorld(Color rereColor)
     {
-        float new_r = _TopColor.r + (rere.r - _TopColor.r) / velocity;
-        float new_g = _TopColor.g + (rere.g - _TopColor.g) / velocity;
-        float new_b = _TopColor.b + (rere.b - _TopColor.b) / velocity;
+        // TopColor 갱신
+        UpdateTopColor(rereColor);
+        // 조건 확인 후 월드 전환 (안개, 오브젝트, npc)
+        HandleCityActivation();
+        // 조명 색상 업데이트
+        UpdateLightColors();
+    }
+    
+    public void UpdateTopColor(Color targetColor)
+    {
+        // TopColor 갱신
+        float new_r = _TopColor.r + (targetColor.r - _TopColor.r) / velocity;
+        float new_g = _TopColor.g + (targetColor.g - _TopColor.g) / velocity;
+        float new_b = _TopColor.b + (targetColor.b - _TopColor.b) / velocity;
 
         _TopColor = new Color(new_r, new_g, new_b);
         sphere.material.SetColor("_TopColor", _TopColor);
-
-        if (IsGray(new_r, new_g, new_b))
-        {
-            if (clonedGray == false)
-            {
-                CloneAndActivateGray();
-            }
-
-            blueCity.SetActive(false);
-            greenCity.SetActive(false);
-            grayCity.SetActive(true);
-            fogController.ToGray();
-        }
-        else if (new_g >= 0.75)
-        {
-            if (clonedGreen == false)
-            {
-                CloneAndActivateGreen();
-            }
-
-            grayCity.SetActive(false);
-            blueCity.SetActive(false);
-            greenCity.SetActive(true);
-            fogController.ToGreen();
-        }
-        else if (new_b >= 0.75)
-        {
-            if (clonedBlue == false)
-            {
-                CloneAndActivateBlue();
-            }
-
-            grayCity.SetActive(false);
-            greenCity.SetActive(false);
-            blueCity.SetActive(true);
-            fogController.ToBlue();
-        }
-
-
-        if (new_r + 0.2 > 1.0f)
-        {
-            new_r = 0.8f;
-        }
-        if (new_g + 0.2 > 1.0f)
-        {
-            new_g = 0.8f;
-        }
-        if (new_b + 0.2 > 1.0f)
-        {
-            new_b = 0.8f;
-        }
-        //worldLight.color = new Color(new_r + 0.2f, new_g + 0.2f, new_b + 0.2f);
-        billboardLight.color = new Color(new_r + 0.2f, new_g + 0.2f, new_b + 0.2f);
     }
 
-    public void UpdateWorld_BottomColor(Color rere)
+    public void UpdateBottomColor(Color rere)
     {
         float new_r = _BottomColor.r + (rere.r - _BottomColor.r) / velocity;
         float new_g = _BottomColor.g + (rere.g - _BottomColor.g) / velocity;
@@ -191,7 +148,7 @@ public class WorldColorManager : MonoBehaviour
         sphere.material.SetColor("_BottomColor", _BottomColor);
     }
 
-    public void UpdateWorld_Rim_Color(Color rere)
+    public void UpdateRimColor(Color rere)
     {
         float new_r = _Rim_Color.r + (rere.r - _Rim_Color.r) / velocity;
         float new_g = _Rim_Color.g + (rere.g - _Rim_Color.g) / velocity;
@@ -199,5 +156,65 @@ public class WorldColorManager : MonoBehaviour
 
         _Rim_Color = new Color(new_r, new_g, new_b);
         sphere.material.SetColor("_Rim_Color", _Rim_Color);
+    }
+
+    // TopColor를 기준으로 옆면, rimColor가 정해지므로 TopColor기준으로 월드전환 컨트롤
+    private void HandleCityActivation()
+    {
+        float new_r = _TopColor.r;
+        float new_g = _TopColor.g;
+        float new_b = _TopColor.b;
+
+        if (IsGray(new_r, new_g, new_b))
+        {
+            if (clonedGray == false)
+            {
+                CloneAndActivateGray();
+            }
+
+            SetActiveCities(false, false, true);
+            fogController.ToGray();
+        }
+        else if (new_g >= 0.75)
+        {
+            if (clonedGreen == false)
+            {
+                CloneAndActivateGreen();
+            }
+
+            SetActiveCities(false, true, false);
+            fogController.ToGreen();
+        }
+        else if (new_b >= 0.75)
+        {
+            if (clonedBlue == false)
+            {
+                CloneAndActivateBlue();
+            }
+
+            SetActiveCities(true, false, false);
+            fogController.ToBlue();
+        }
+    }
+
+    private void SetActiveCities(bool blueActive, bool greenActive, bool grayActive)
+    {
+        blueCity.SetActive(blueActive);
+        greenCity.SetActive(greenActive);
+        grayCity.SetActive(grayActive);
+    }
+
+    private void UpdateLightColors()
+    {
+        float new_r = ClampColorValue(_TopColor.r);
+        float new_g = ClampColorValue(_TopColor.g);
+        float new_b = ClampColorValue(_TopColor.b);
+
+        billboardLight.color = new Color(new_r + 0.2f, new_g + 0.2f, new_b + 0.2f);
+    }
+
+    private float ClampColorValue(float value)
+    {
+        return Mathf.Min(value + 0.2f, 0.8f);
     }
 }
