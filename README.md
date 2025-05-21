@@ -6,7 +6,7 @@
 
 ### 🌉 도시 모습 (Unity)
 
-| 회색 도시 | 초록 도시 | 파랑 도시 |
+| 회색 도시 | 파랑 도시 | 초록 도시 |
 |:--:|:--:|:--:|
 |<img src = "https://github.com/god-fun-re-fun/.github/assets/78733700/5b4241ed-c3dc-4884-a4a6-2144bdcd27d9" width ="350">|<img src = "https://github.com/god-fun-re-fun/.github/assets/78733700/14998954-fa4c-470a-b61c-1d479c7cd010" width ="350">|<img src = "https://github.com/god-fun-re-fun/.github/assets/78733700/7720e2b9-380f-44bf-8f22-7b707d31c31e" width ="350">|
 
